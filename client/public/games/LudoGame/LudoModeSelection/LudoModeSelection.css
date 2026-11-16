@@ -1,0 +1,892 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        "Comic Sans MS",
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    overflow-x: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8bdcff 0%,
+            #b7ecff 45%,
+            #e8faff 100%
+        );
+
+    color: #253052;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   FLOATING BUBBLES
+========================= */
+
+.bubble {
+    position: fixed;
+
+    border-radius: 50%;
+
+    opacity: 0.35;
+
+    pointer-events: none;
+
+    animation:
+        floatBubble 5s ease-in-out infinite;
+}
+
+.bubble-1 {
+    width: 60px;
+    height: 60px;
+
+    background: #ffffff;
+
+    top: 15%;
+    left: 4%;
+}
+
+.bubble-2 {
+    width: 35px;
+    height: 35px;
+
+    background: #ffd93d;
+
+    bottom: 15%;
+    right: 7%;
+
+    animation-delay: 1s;
+}
+
+.bubble-3 {
+    width: 50px;
+    height: 50px;
+
+    background: #ff6b9d;
+
+    top: 65%;
+    left: 10%;
+
+    animation-delay: 2s;
+}
+
+@keyframes floatBubble {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+.star {
+    position: fixed;
+
+    font-size: 22px;
+
+    pointer-events: none;
+
+    animation:
+        starFloat 3s ease-in-out infinite;
+}
+
+.star-1 {
+    top: 18%;
+    right: 9%;
+}
+
+.star-2 {
+    top: 35%;
+    left: 8%;
+
+    animation-delay: 0.8s;
+}
+
+.star-3 {
+    bottom: 18%;
+    right: 13%;
+
+    animation-delay: 1.5s;
+}
+
+.star-4 {
+    top: 12%;
+    left: 17%;
+
+    font-size: 16px;
+
+    animation-delay: 2s;
+}
+
+@keyframes starFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(15deg)
+            scale(1.1);
+    }
+}
+
+
+/* =========================
+   CLOUDS
+========================= */
+
+.cloud {
+    position: fixed;
+
+    font-size: 55px;
+
+    opacity: 0.45;
+
+    pointer-events: none;
+
+    animation:
+        cloudMove 12s linear infinite;
+}
+
+.cloud-1 {
+    top: 7%;
+    left: -80px;
+}
+
+.cloud-2 {
+    top: 45%;
+    right: -80px;
+
+    animation-delay: 5s;
+}
+
+@keyframes cloudMove {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(100px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    width: 100%;
+
+    padding: 12px clamp(20px, 6vw, 80px);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.logo-dice {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 5px 0 #d8e8ef;
+
+    animation:
+        diceBounce 3s ease-in-out infinite;
+}
+
+@keyframes diceBounce {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(8deg) translateY(-4px);
+    }
+}
+
+.logo-main {
+    display: block;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    color: #ff4f81;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        2px 2px 0 #ffffff;
+}
+
+.logo-sub {
+    display: block;
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    color: #687399;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   PLAYERS BADGE
+========================= */
+
+.players-badge {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 15px;
+
+    background: #ffffff;
+
+    border-radius: 50px;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    color: #586484;
+
+    box-shadow:
+        0 4px 0 #d3e5ec;
+}
+
+.players-icon {
+    font-size: 16px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: min(1080px, 90%);
+
+    margin: auto;
+
+    padding: 5px 0 10px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+
+    margin-bottom: 18px;
+}
+
+.floating-dice {
+    display: inline-block;
+
+    font-size: 34px;
+
+    margin-bottom: 4px;
+
+    animation:
+        bigDice 2s ease-in-out infinite;
+}
+
+@keyframes bigDice {
+
+    0%,
+    100% {
+        transform:
+            rotate(-10deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            rotate(10deg)
+            translateY(-6px);
+    }
+}
+
+.title-badge {
+    display: inline-block;
+
+    padding: 5px 14px;
+
+    background: #ffda44;
+
+    color: #654f00;
+
+    border-radius: 50px;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 3px 0 #e3b927;
+
+    margin-bottom: 7px;
+}
+
+.hero h1 {
+    font-size:
+        clamp(30px, 4vw, 46px);
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    color: #34446d;
+
+    text-shadow:
+        2px 3px 0 #ffffff;
+}
+
+.hero h1 span {
+    display: inline;
+
+    color: #ff4f81;
+
+    text-shadow:
+        2px 3px 0 #ffffff;
+}
+
+.hero p {
+    margin-top: 7px;
+
+    color: #687399;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.modes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.mode-card {
+    position: relative;
+
+    padding: 18px;
+
+    height: 285px;
+
+    min-height: 0;
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    border: 4px solid #ffffff;
+
+    box-shadow:
+        0 7px 0 rgba(64, 83, 120, 0.15);
+
+    display: flex;
+
+    flex-direction: column;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    overflow: hidden;
+}
+
+.mode-card:hover {
+    transform:
+        translateY(-7px)
+        rotate(-1deg);
+
+    box-shadow:
+        0 14px 0 rgba(64, 83, 120, 0.16);
+}
+
+.mode-card:nth-child(2):hover {
+    transform:
+        translateY(-7px)
+        rotate(1deg);
+}
+
+
+/* =========================
+   CARD DECORATION
+========================= */
+
+.card-decoration {
+    position: absolute;
+
+    top: 7px;
+
+    right: 10px;
+
+    font-size: 21px;
+
+    animation:
+        decorationFloat 2s ease-in-out infinite;
+}
+
+@keyframes decorationFloat {
+
+    0%,
+    100% {
+        transform: rotate(-10deg);
+    }
+
+    50% {
+        transform: rotate(15deg) translateY(-4px);
+    }
+}
+
+
+/* =========================
+   MODE ICON
+========================= */
+
+.mode-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.mode-card:hover .mode-icon {
+    transform:
+        rotate(-8deg)
+        scale(1.1);
+}
+
+
+/* =========================
+   CARD COLORS
+========================= */
+
+.local {
+    border-color: #72dfb2;
+}
+
+.local .mode-icon {
+    background: #d9fae9;
+}
+
+.friend {
+    border-color: #ff8fb0;
+}
+
+.friend .mode-icon {
+    background: #ffe1ea;
+}
+
+.random {
+    border-color: #78cfff;
+}
+
+.random .mode-icon {
+    background: #dff4ff;
+}
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content {
+    flex: 1;
+}
+
+.mode-number {
+    font-size: 9px;
+
+    font-weight: 900;
+
+    color: #a1aac1;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 3px;
+}
+
+.mode-card h2 {
+    font-size: 20px;
+
+    color: #354467;
+
+    margin-bottom: 6px;
+}
+
+.mode-card p {
+    color: #7a849e;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    font-weight: 600;
+
+    max-width: 210px;
+}
+
+
+/* =========================
+   PLAYERS
+========================= */
+
+.players {
+    margin-top: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: #4e5b78;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+.players span {
+    font-size: 9px;
+
+    color: #929bb0;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.play-button {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.local .play-button {
+    background: #48ce91;
+}
+
+.friend .play-button {
+    background: #ff6f9c;
+}
+
+.random .play-button {
+    background: #4db7ef;
+}
+
+.play-button:hover {
+    transform:
+        translateY(-2px);
+}
+
+.play-button:active {
+    transform:
+        translateY(2px);
+
+    box-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.play-button span {
+    font-size: 15px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px;
+
+    color: #75819e;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+footer span:first-child,
+footer span:last-child {
+    animation:
+        footerDice 1.5s ease-in-out infinite;
+}
+
+@keyframes footerDice {
+
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+
+    50% {
+        transform: rotate(20deg);
+    }
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    main {
+        padding-top: 10px;
+    }
+
+    .modes {
+        grid-template-columns: 1fr;
+
+        max-width: 480px;
+
+        margin: auto;
+
+        gap: 15px;
+    }
+
+    .mode-card {
+        height: 270px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 500px) {
+
+    .page {
+        overflow-y: auto;
+    }
+
+    header {
+        padding: 12px 15px;
+    }
+
+    .logo-dice {
+        width: 42px;
+        height: 42px;
+
+        font-size: 24px;
+    }
+
+    .logo-main {
+        font-size: 18px;
+    }
+
+    .logo-sub {
+        font-size: 7px;
+    }
+
+    .players-badge {
+        padding: 7px 10px;
+
+        font-size: 9px;
+    }
+
+    .players-icon {
+        font-size: 14px;
+    }
+
+    main {
+        width: 92%;
+
+        padding-top: 8px;
+    }
+
+    .hero {
+        margin-bottom: 18px;
+    }
+
+    .floating-dice {
+        font-size: 30px;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero h1 span {
+        display: block;
+    }
+
+    .hero p {
+        font-size: 12px;
+    }
+
+    .mode-card {
+        height: 260px;
+
+        padding: 17px;
+    }
+
+    .mode-icon {
+        width: 55px;
+        height: 55px;
+
+        font-size: 28px;
+    }
+
+    .cloud {
+        display: none;
+    }
+
+    footer {
+        padding: 10px 5px;
+    }
+}

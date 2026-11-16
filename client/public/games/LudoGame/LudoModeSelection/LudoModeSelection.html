@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ludo - Choose Mode</title>
+
+    <link rel="stylesheet" href="LudoModeSelection.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    <script src="LudoModeSelection.js"></script>
+</head>
+
+<body>
+
+    <!-- Floating decorations -->
+
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+
+    <div class="star star-1">⭐</div>
+    <div class="star star-2">✨</div>
+    <div class="star star-3">⭐</div>
+    <div class="star star-4">✨</div>
+
+    <div class="cloud cloud-1">☁️</div>
+    <div class="cloud cloud-2">☁️</div>
+
+
+    <div class="page">
+
+        <!-- Header -->
+
+        <header>
+
+            <div class="logo">
+                <div class="logo-dice">
+                    🎲
+                </div>
+
+                <div>
+                    <span class="logo-main">LUDO</span>
+                    <span class="logo-sub">FUN TIME!</span>
+                </div>
+            </div>
+
+
+            <div class="players-badge">
+
+                <span class="players-icon">
+                    👥
+                </span>
+
+                <span>
+                    2 PLAYERS
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- Main -->
+
+        <main>
+
+            <section class="hero">
+
+                <div class="floating-dice">
+                    🎲
+                </div>
+
+                <div class="title-badge">
+                    🎮 LET'S PLAY!
+                </div>
+
+                <h1>
+                    Choose Your
+                    <span>Game Mode!</span>
+                </h1>
+
+                <p>
+                    Pick your favorite way to play Ludo!
+                </p>
+
+            </section>
+
+
+            <!-- Cards -->
+
+            <section class="modes">
+
+
+                <!-- LOCAL -->
+
+                <div class="mode-card local">
+
+                    <div class="card-decoration">
+                        ⭐
+                    </div>
+
+                    <div class="mode-icon">
+                        🏠
+                    </div>
+
+                    <div class="card-content">
+
+                        <div class="mode-number">
+                            01
+                        </div>
+
+                        <h2>
+                            Local Play
+                        </h2>
+
+                        <p>
+                            Sit together and play
+                            on the same device!
+                        </p>
+
+                        <div class="players">
+                            👤 + 👤
+                            <span>2 Players</span>
+                        </div>
+
+                    </div>
+
+                    <button class="play-button">
+                        LET'S PLAY!
+
+                        <span>🚀</span>
+                    </button>
+
+                </div>
+
+
+                <!-- FRIEND -->
+
+                <div class="mode-card friend" onclick="PlayWithFriend()">
+
+                    <div class="card-decoration">
+                        💫
+                    </div>
+
+                    <div class="mode-icon">
+                        👫
+                    </div>
+
+                    <div class="card-content">
+
+                        <div class="mode-number">
+                            02
+                        </div>
+
+                        <h2>
+                            Play with Friend
+                        </h2>
+
+                        <p>
+                            Invite your best friend
+                            and battle it out!
+                        </p>
+
+                        <div class="players">
+                            🧑‍🤝‍🧑
+                            <span>Private Game</span>
+                        </div>
+
+                    </div>
+
+                    <button class="play-button">
+                        INVITE FRIEND!
+
+                        <span>💌</span>
+                    </button>
+
+                </div>
+
+
+                <!-- RANDOM -->
+
+                <div class="mode-card random" onclick="RandomMatchingPage()">
+
+                    <div class="card-decoration">
+                        🌟
+                    </div>
+
+                    <div class="mode-icon">
+                        🌎
+                    </div>
+
+                    <div class="card-content">
+
+                        <div class="mode-number">
+                            03
+                        </div>
+
+                        <h2>
+                            Random Player
+                        </h2>
+
+                        <p>
+                            Find someone online
+                            and start the fun!
+                        </p>
+
+                        <div class="players">
+                            ⚡ 🎲
+                            <span>Quick Match</span>
+                        </div>
+
+                    </div>
+
+                    <button class="play-button">
+                        FIND PLAYER!
+
+                        <span>🔎</span>
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- Footer -->
+
+        <footer>
+
+            <span>🎲</span>
+
+            <span>
+                Roll the dice • Have fun • Be awesome!
+            </span>
+
+            <span>🎲</span>
+
+        </footer>
+
+    </div>
+
+</body>
+
+
+</html>

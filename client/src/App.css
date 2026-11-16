@@ -1,0 +1,6 @@
+.box{
+  height: 300px;
+  width: 300px;
+  border: 0.1px solid #ddd;
+  padding-left: 10px;
+}

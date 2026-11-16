@@ -1,0 +1,1881 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.9), transparent 25%),
+        radial-gradient(circle at 90% 90%, rgba(255,255,255,0.8), transparent 25%),
+        linear-gradient(135deg, #eef3ff, #f8f4ff);
+
+    color: #20253a;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.ludogame-container {
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.game-header {
+
+    width: 100%;
+
+    min-height: 92px;
+
+    padding: 12px 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: rgba(255,255,255,0.88);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(120,130,170,0.15);
+
+    box-shadow:
+        0 8px 30px rgba(35,40,80,0.08);
+
+    z-index: 20;
+}
+
+
+/* =====================================================
+   PLAYER CARD
+===================================================== */
+
+.player-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 220px;
+
+    padding: 8px 14px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.9);
+
+    border: 1px solid rgba(100,110,160,0.12);
+
+    box-shadow:
+        0 5px 18px rgba(30,40,90,0.08);
+}
+
+.opponent-player {
+
+    justify-content: flex-end;
+
+    text-align: right;
+}
+
+
+/* Avatar */
+
+.player-avatar {
+
+    width: 58px;
+    height: 58px;
+
+    position: relative;
+
+    flex-shrink: 0;
+}
+
+.player-avatar img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 4px solid #43c46b;
+
+    background: #e9edf8;
+}
+
+.opponent-avatar img {
+
+    border-color: #536dfe;
+}
+
+
+/* Online */
+
+.online-dot {
+
+    position: absolute;
+
+    right: 1px;
+    bottom: 3px;
+
+    width: 14px;
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: #35c76f;
+
+    border: 3px solid white;
+}
+
+
+/* Player information */
+
+.player-label {
+
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: #858ba1;
+}
+
+.player-info h3 {
+
+    margin: 3px 0;
+
+    font-size: 17px;
+
+    color: #272c43;
+}
+
+.player-status {
+
+    font-size: 11px;
+
+    color: #35ae65;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   GAME TITLE
+===================================================== */
+
+.game-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: center;
+}
+
+.title-crown {
+
+    font-size: 34px;
+
+    color: #f5b82e;
+
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.15));
+}
+
+.game-title h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    line-height: 28px;
+
+    font-weight: 1000;
+
+    letter-spacing: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #ff4d6d,
+        #7455e8,
+        #3e7bfa
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.game-title span {
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    font-weight: 800;
+
+    color: #858ba1;
+}
+
+
+/* =====================================================
+   MAIN GAME AREA
+===================================================== */
+
+.game-area {
+
+    flex: 1;
+
+    min-height: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    gap: 22px;
+
+    padding: 18px 25px 22px;
+}
+
+
+/* =====================================================
+   BOARD SECTION
+===================================================== */
+
+.board-section {
+
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.92),
+            rgba(244,247,255,0.8)
+        );
+
+    border: 1px solid rgba(120,130,170,0.13);
+
+    box-shadow:
+        0 15px 40px rgba(45,50,100,0.09);
+
+    overflow: hidden;
+}
+
+
+/* Board top */
+
+.board-top-bar {
+
+    width: 100%;
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    z-index: 5;
+}
+
+.match-badge {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: #fff;
+
+    box-shadow: 0 4px 15px rgba(40,50,90,0.08);
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    color: #525a75;
+}
+
+.live-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ff4d6d;
+
+    box-shadow: 0 0 0 4px rgba(255,77,109,0.13);
+
+    animation: livePulse 1.5s infinite;
+}
+
+.room-info {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    color: #9298ab;
+
+    letter-spacing: 1px;
+}
+
+.room-info span {
+
+    color: #4d55a5;
+
+    margin-left: 4px;
+}
+
+
+/* =====================================================
+   BOARD WRAPPER
+===================================================== */
+
+.board-wrapper {
+
+    width: min(70vh, 650px);
+
+    max-width: 90%;
+
+    aspect-ratio: 1 / 1;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 10px;
+}
+
+
+/* Glow behind board */
+
+.board-glow {
+
+    position: absolute;
+
+    width: 90%;
+    height: 90%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(104,116,255,0.16),
+            transparent 68%
+        );
+
+    filter: blur(30px);
+
+    z-index: 0;
+}
+
+
+/* =====================================================
+   LUDO BOARD
+   YOUR BOARD SYSTEM IS PRESERVED
+===================================================== */
+
+.ludo-baord {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns: repeat(15, 1fr);
+
+    grid-template-rows: repeat(15, 1fr);
+
+    background-image: url('../LudoGamesAssets/ludo-board.jpg');
+
+    background-repeat: no-repeat;
+
+    background-size: contain;
+
+    background-position: center;
+
+    border-radius: 8px;
+
+    filter:
+        drop-shadow(0 15px 22px rgba(30,40,80,0.18));
+}
+
+
+/* =====================================================
+   CELLS
+===================================================== */
+
+.cell {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.game-sidebar {
+
+    width: 310px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+
+    overflow-y: auto;
+
+    padding: 3px;
+
+}
+
+
+/* =====================================================
+   TURN CARD
+===================================================== */
+
+.turn-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 15px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6b63f6,
+            #4b82f4
+        );
+
+    color: white;
+
+    box-shadow:
+        0 10px 25px rgba(81,91,220,0.25);
+}
+
+.turn-icon {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,0.17);
+
+    font-size: 22px;
+}
+
+.small-heading {
+
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.7px;
+
+    opacity: 0.7;
+}
+
+.turn-card h2 {
+
+    margin: 3px 0 0;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   DICE CARD
+===================================================== */
+
+.dice-card {
+
+    padding: 20px;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.94);
+
+    border: 1px solid rgba(100,110,160,0.12);
+
+    box-shadow:
+        0 10px 30px rgba(40,50,100,0.08);
+
+    text-align: center;
+}
+
+.dice-card > .small-heading {
+
+    color: #858ba1;
+}
+
+
+/* =====================================================
+   DICE
+===================================================== */
+
+.dice-stage {
+
+    height: 125px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* Actual dice */
+
+.dice {
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #e9ecf7
+        );
+
+    border: 1px solid #dfe3ef;
+
+    box-shadow:
+        0 12px 25px rgba(50,60,100,0.18);
+
+    transform: rotate(0deg);
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.2s;
+}
+
+.dice-face {
+
+    font-size: 31px;
+
+    font-weight: 900;
+
+    color: #555e83;
+}
+
+
+/* Dice rolling animation */
+
+.dice.rolling {
+
+    animation: diceRoll 0.65s ease-in-out;
+}
+
+@keyframes diceRoll {
+
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    20% {
+        transform: rotate(90deg) scale(1.15);
+    }
+
+    40% {
+        transform: rotate(180deg) scale(0.9);
+    }
+
+    60% {
+        transform: rotate(270deg) scale(1.15);
+    }
+
+    80% {
+        transform: rotate(360deg) scale(0.95);
+    }
+
+    100% {
+        transform: rotate(450deg) scale(1);
+    }
+}
+
+
+/* Dice result */
+
+.dice-result {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+.dice-result span {
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    color: #9aa0b3;
+}
+
+.dice-result strong {
+
+    font-size: 16px;
+
+    color: #555e83;
+}
+
+
+/* =====================================================
+   ROLL BUTTON
+===================================================== */
+
+.roll-button {
+
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5272,
+            #7455e8
+        );
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 8px 20px rgba(106,83,220,0.25);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        opacity 0.2s;
+}
+
+.roll-button:hover:not(:disabled) {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(106,83,220,0.35);
+}
+
+.roll-button:active:not(:disabled) {
+
+    transform: translateY(1px);
+}
+
+.roll-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: 0.45;
+
+    box-shadow: none;
+}
+
+.button-icon {
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   MATCH INFO
+===================================================== */
+
+.match-info-card {
+
+    padding: 17px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.94);
+
+    border: 1px solid rgba(100,110,160,0.12);
+
+    box-shadow:
+        0 8px 25px rgba(40,50,100,0.06);
+}
+
+.info-title {
+
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    color: #555e83;
+
+    margin-bottom: 13px;
+}
+
+.info-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid #eef0f6;
+
+    font-size: 11px;
+
+    color: #9197aa;
+}
+
+.info-row:last-child {
+
+    border-bottom: none;
+
+    padding-bottom: 0;
+}
+
+.info-row strong {
+
+    color: #525a75;
+}
+
+.playing-text {
+
+    color: #35b86b !important;
+}
+
+
+/* =====================================================
+   TIP
+===================================================== */
+
+.game-tip {
+
+    display: flex;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    border-radius: 18px;
+
+    background: #fff9e7;
+
+    border: 1px solid #f8e8b8;
+}
+
+.tip-icon {
+
+    font-size: 20px;
+}
+
+.game-tip strong {
+
+    font-size: 11px;
+
+    color: #6e5a27;
+}
+
+.game-tip p {
+
+    margin: 4px 0 0;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color: #998754;
+}
+
+
+/* =====================================================
+   YOUR EXISTING TOKENS
+===================================================== */
+
+#player1token0,
+#player1token1,
+#player1token2,
+#player1token3 {
+
+    height: 50%;
+
+    width: 50%;
+
+    background-color: rgb(27, 203, 65);
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.2s;
+}
+
+#player1token0:hover,
+#player1token1:hover,
+#player1token2:hover,
+#player1token3:hover {
+
+    transform: scale(1.2);
+
+    box-shadow:
+        0 0 12px rgba(27,203,65,0.7);
+}
+
+
+#player2token0,
+#player2token1,
+#player2token2,
+#player2token3 {
+
+    height: 50%;
+
+    width: 50%;
+
+    background-color: rgb(59, 83, 216);
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.2s;
+}
+
+#player2token0:hover,
+#player2token1:hover,
+#player2token2:hover,
+#player2token3:hover {
+
+    transform: scale(1.2);
+
+    box-shadow:
+        0 0 12px rgba(59,83,216,0.7);
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes livePulse {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(255,77,109,0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 7px rgba(255,77,109,0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255,77,109,0);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .game-header {
+
+        padding: 10px 18px;
+    }
+
+    .player-card {
+
+        min-width: 180px;
+    }
+
+    .game-sidebar {
+
+        width: 270px;
+    }
+
+    .game-title h1 {
+
+        font-size: 25px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 750px) {
+
+    body {
+
+        overflow: auto;
+    }
+
+    .ludogame-container {
+
+        height: auto;
+
+        min-height: 100vh;
+
+        overflow: visible;
+    }
+
+    .game-header {
+
+        min-height: 75px;
+
+        padding: 8px 10px;
+
+        gap: 6px;
+    }
+
+    .player-card {
+
+        min-width: 0;
+
+        padding: 5px;
+
+        background: transparent;
+
+        border: none;
+
+        box-shadow: none;
+    }
+
+    .player-avatar {
+
+        width: 42px;
+        height: 42px;
+    }
+
+    .player-info {
+
+        display: none;
+    }
+
+    .opponent-info {
+
+        display: none;
+    }
+
+    .game-title {
+
+        gap: 5px;
+    }
+
+    .title-crown {
+
+        display: none;
+    }
+
+    .game-title h1 {
+
+        font-size: 20px;
+
+        letter-spacing: 2px;
+    }
+
+    .game-title span {
+
+        font-size: 7px;
+
+        letter-spacing: 1.5px;
+    }
+
+    .game-area {
+
+        flex-direction: column;
+
+        height: auto;
+
+        padding: 10px;
+
+        gap: 12px;
+    }
+
+    .board-section {
+
+        width: 100%;
+
+        min-height: auto;
+
+        aspect-ratio: 1 / 1;
+
+        border-radius: 20px;
+    }
+
+    .board-top-bar {
+
+        padding: 10px;
+    }
+
+    .board-wrapper {
+
+        width: 90%;
+
+        max-width: 600px;
+
+        margin-top: 0;
+    }
+
+    .game-sidebar {
+
+        width: 100%;
+
+        overflow: visible;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+    .turn-card {
+
+        grid-column: 1 / -1;
+    }
+
+    .dice-card {
+
+        grid-column: 1 / -1;
+    }
+
+    .match-info-card,
+    .game-tip {
+
+        display: none;
+    }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .game-header {
+
+        min-height: 65px;
+    }
+
+    .player-avatar {
+
+        width: 38px;
+        height: 38px;
+    }
+
+    .game-title h1 {
+
+        font-size: 17px;
+    }
+
+    .board-section {
+
+        border-radius: 16px;
+    }
+
+    .turn-card {
+
+        padding: 12px;
+    }
+
+    .dice-card {
+
+        padding: 15px;
+    }
+}
+
+
+/* =====================================================
+   🎮 CARTOON LUDO UI
+===================================================== */
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at 10% 15%, #fff7b8 0%, transparent 18%),
+        radial-gradient(circle at 90% 15%, #bdefff 0%, transparent 20%),
+        radial-gradient(circle at 20% 90%, #ffd2e8 0%, transparent 20%),
+        linear-gradient(135deg, #fff7d6, #e5f7ff);
+
+    color: #30304a;
+}
+
+
+/* =====================================================
+   🎮 GAME HEADER
+===================================================== */
+
+.game-header {
+    background: #ffffff;
+
+    border-bottom: 5px solid #292957;
+
+    box-shadow:
+        0 6px 0 #292957,
+        0 12px 25px rgba(48, 48, 90, 0.15);
+
+    padding: 12px 35px;
+}
+
+
+/* =====================================================
+   👤 PLAYER CARDS
+===================================================== */
+
+.player-card {
+    position: relative;
+
+    background: #fff;
+
+    border: 4px solid #292957;
+
+    border-radius: 22px;
+
+    padding: 8px 14px;
+
+    box-shadow:
+        0 5px 0 #292957,
+        0 9px 18px rgba(50, 50, 90, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* Active player */
+
+.player-card.active-player {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 7px 0 #292957,
+        0 0 0 5px rgba(255, 203, 58, 0.35),
+        0 12px 25px rgba(255, 183, 0, 0.25);
+
+    animation: activePlayerBounce 1.8s ease-in-out infinite;
+}
+
+
+/* Player avatar */
+
+.player-avatar {
+    width: 62px;
+    height: 62px;
+}
+
+
+.player-avatar img {
+    border: 5px solid #28c76f;
+
+    box-shadow:
+        0 4px 0 #188c4c;
+
+    background: #fff;
+}
+
+
+.opponent-avatar img {
+    border-color: #5274ff;
+
+    box-shadow:
+        0 4px 0 #354fc0;
+}
+
+
+/* =====================================================
+   ⏱️ TURN TIMER
+===================================================== */
+
+.turn-timer {
+
+    position: absolute;
+
+    right: -7px;
+    bottom: -7px;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #ffcf33;
+
+    color: #292957;
+
+    border: 3px solid #292957;
+
+    border-radius: 50%;
+
+    font-size: 11px;
+
+    font-weight: 1000;
+
+    box-shadow:
+        0 3px 0 #292957;
+
+    z-index: 10;
+
+    opacity: 0.35;
+
+    transition:
+        opacity 0.25s,
+        transform 0.25s,
+        background 0.25s;
+}
+
+
+/* Timer becomes visible only for active player */
+
+.active-player .turn-timer {
+
+    opacity: 1;
+
+    background: #ffcf33;
+
+    transform: scale(1.15);
+
+    animation: timerPop 1s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   👤 PLAYER TEXT
+===================================================== */
+
+.player-label {
+    color: #7b70d8;
+
+    font-size: 10px;
+
+    font-weight: 1000;
+
+    letter-spacing: 1.5px;
+}
+
+
+.player-info h3 {
+
+    color: #292957;
+
+    font-size: 18px;
+
+    font-weight: 1000;
+}
+
+
+.player-status {
+
+    color: #ff8a00;
+
+    font-size: 10px;
+
+    font-weight: 900;
+}
+
+
+/* =====================================================
+   👑 LUDO TITLE
+===================================================== */
+
+.game-title {
+
+    transform: rotate(-2deg);
+}
+
+
+.title-crown {
+
+    font-size: 38px;
+
+    animation: crownFloat 2s ease-in-out infinite;
+}
+
+
+.game-title h1 {
+
+    font-size: 34px;
+
+    font-weight: 1000;
+
+    letter-spacing: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #ff4f70,
+        #ff9f1c,
+        #7a65ff,
+        #2ec4b6
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(2px 3px 0 rgba(41,41,87,0.15));
+}
+
+
+.game-title span {
+
+    color: #ff8a00;
+
+    font-weight: 1000;
+}
+
+
+/* =====================================================
+   🎲 BOARD AREA
+===================================================== */
+
+.board-section {
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #fff8df 75%
+        );
+
+    border: 4px solid #292957;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 7px 0 #292957,
+        0 15px 35px rgba(41,41,87,0.15);
+}
+
+
+.board-glow {
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 207, 51, 0.28),
+            transparent 68%
+        );
+
+    filter: blur(20px);
+}
+
+
+/* =====================================================
+   🎯 TURN CARD
+===================================================== */
+
+.turn-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffcf33,
+            #ff9f1c
+        );
+
+    color: #292957;
+
+    border: 4px solid #292957;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 5px 0 #292957,
+        0 10px 20px rgba(255, 159, 28, 0.2);
+}
+
+
+.turn-icon {
+
+    background: rgba(255,255,255,0.5);
+
+    border: 3px solid #292957;
+
+    box-shadow:
+        0 3px 0 #292957;
+}
+
+
+.turn-card h2 {
+
+    color: #292957;
+
+    font-weight: 1000;
+}
+
+
+/* =====================================================
+   🎲 DICE CARD
+===================================================== */
+
+.dice-card {
+
+    background: #ffffff;
+
+    border: 4px solid #292957;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 5px 0 #292957,
+        0 12px 25px rgba(41,41,87,0.12);
+}
+
+
+.dice {
+
+    width: 78px;
+    height: 78px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f1efff
+        );
+
+    border: 4px solid #292957;
+
+    box-shadow:
+        0 6px 0 #292957,
+        0 10px 20px rgba(41,41,87,0.18);
+}
+
+
+.dice-face {
+
+    color: #6d5dfc;
+
+    font-size: 34px;
+
+    font-weight: 1000;
+}
+
+
+/* =====================================================
+   🎲 ROLL BUTTON
+===================================================== */
+
+.roll-button {
+
+    height: 52px;
+
+    border: 4px solid #292957;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5c8a,
+            #ff8a00
+        );
+
+    box-shadow:
+        0 5px 0 #292957,
+        0 10px 18px rgba(255, 92, 138, 0.2);
+
+    font-size: 13px;
+
+    font-weight: 1000;
+}
+
+
+.roll-button:hover:not(:disabled) {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 0 #292957,
+        0 14px 22px rgba(255, 92, 138, 0.25);
+}
+
+
+.roll-button:active:not(:disabled) {
+
+    transform: translateY(2px);
+
+    box-shadow:
+        0 2px 0 #292957;
+}
+
+
+.roll-button:disabled {
+
+    opacity: 0.4;
+}
+
+
+/* =====================================================
+   🧸 GAME TIP
+===================================================== */
+
+.game-tip {
+
+    background: #fff3a8;
+
+    border: 4px solid #292957;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 4px 0 #292957;
+}
+
+
+.game-tip strong {
+
+    color: #292957;
+
+    font-weight: 1000;
+}
+
+
+.game-tip p {
+
+    color: #625f82;
+}
+
+
+/* =====================================================
+   🟢 PLAYER 1 TOKENS
+===================================================== */
+
+#player1token0,
+#player1token1,
+#player1token2,
+#player1token3 {
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff 0%,
+            #52ef7c 20%,
+            #1bcb41 70%
+        );
+
+    border: 3px solid #147d32;
+
+    box-shadow:
+        0 3px 0 #147d32,
+        0 4px 8px rgba(0,0,0,0.25);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* 🔵 PLAYER 2 TOKENS */
+
+#player2token0,
+#player2token1,
+#player2token2,
+#player2token3 {
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ffffff 0%,
+            #7190ff 20%,
+            #3b53d8 70%
+        );
+
+    border: 3px solid #283b9d;
+
+    box-shadow:
+        0 3px 0 #283b9d,
+        0 4px 8px rgba(0,0,0,0.25);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   ✨ CURRENT TURN TOKEN BLINK
+===================================================== */
+
+.turn-token {
+
+    animation:
+        tokenTurnBlink 1.8s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   🎬 ANIMATIONS
+===================================================== */
+
+@keyframes tokenTurnBlink {
+
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.18);
+        filter: brightness(1.3);
+        opacity: 0.65;
+    }
+
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+        opacity: 1;
+    }
+}
+
+
+@keyframes activePlayerBounce {
+
+    0%,
+    100% {
+        transform: translateY(-2px);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+
+@keyframes timerPop {
+
+    0%,
+    100% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+
+@keyframes crownFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+
+/* =====================================================
+   📱 MOBILE
+===================================================== */
+
+@media (max-width: 750px) {
+
+    .game-header {
+
+        padding: 8px 10px;
+
+        border-bottom-width: 4px;
+    }
+
+
+    .player-card {
+
+        border-width: 3px;
+
+        box-shadow:
+            0 4px 0 #292957;
+    }
+
+
+    .player-avatar {
+
+        width: 46px;
+        height: 46px;
+    }
+
+
+    .turn-timer {
+
+        width: 24px;
+        height: 24px;
+
+        font-size: 9px;
+    }
+
+
+    .game-title h1 {
+
+        font-size: 23px;
+    }
+
+
+    .title-crown {
+
+        font-size: 25px;
+    }
+
+
+    .game-title span {
+
+        font-size: 7px;
+    }
+}
+
+

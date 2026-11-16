@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Play With Friend</title>
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+    
+    <link rel="stylesheet" href="./PlayWithFriend.css">
+    
+</head>
+
+<body>
+
+    <!-- Background Decorations -->
+
+    <div class="cloud cloud-1">☁️</div>
+    <div class="cloud cloud-2">☁️</div>
+
+    <div class="star star-1">⭐</div>
+    <div class="star star-2">✨</div>
+    <div class="star star-3">🌟</div>
+
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+
+
+    <!-- Main Container -->
+
+    <div class="page">
+
+        <div class="room-card">
+
+            <!-- Top Icon -->
+
+            <div class="game-icon">
+                🎲
+            </div>
+
+
+            <!-- Heading -->
+
+            <div class="badge">
+                👥 2 PLAYER GAME
+            </div>
+
+            <h1>
+                Play With
+                <span>Your Friend!</span>
+            </h1>
+
+            <p class="description">
+                Create a room and invite your friend,
+                or enter a room code to join their game.
+            </p>
+
+
+            <!-- =========================
+                 CREATE ROOM
+            ========================== -->
+
+            <div class="section-title">
+                🏠 Create a Room
+            </div>
+
+            <div class="room-section">
+
+                <p class="room-label">
+                    YOUR ROOM ID
+                </p>
+
+                <div class="roomid">
+                    <h2 id="roomid"></h2>
+                </div>
+
+                <p class="share-text">
+                    🔗 Share this number with your friend
+                </p>
+
+            </div>
+
+
+            <!-- Waiting -->
+
+            <div class="waiting">
+
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div>
+                    <strong>Waiting for your friend...</strong>
+
+                    <small>
+                        Don't close this page!
+                    </small>
+                </div>
+
+            </div>
+
+
+            <!-- Divider -->
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+
+            <!-- =========================
+                 JOIN ROOM
+            ========================== -->
+
+            <div class="section-title join-title">
+                🚪 Join a Room
+            </div>
+
+            <div class="join-section">
+
+                <p class="room-label">
+                    ENTER ROOM ID
+                </p>
+
+                <input
+                    type="text"
+                    id="joinRoomInput"
+                    placeholder="Enter room code"
+                    maxlength="20"
+                >
+
+                <button id="joinRoomButton">
+                    🚀 Join Room
+                </button>
+
+            </div>
+
+
+            <!-- Fun message -->
+
+            <div class="fun-message">
+                🎲 Get ready to roll!
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+         const socket = io('http://localhost:5000')
+        const params = new URLSearchParams(window.location.search);
+
+        const name = params.get('playername')
+
+        const roomid = Math.ceil(Math.random() * 99999)
+
+        document.getElementById('roomid').innerHTML = roomid
+
+
+        // Join room button
+
+        document.getElementById('joinRoomButton').addEventListener('click', () => {
+
+            const enteredRoom =
+                document.getElementById('joinRoomInput').value.trim()
+
+            if (!enteredRoom) {
+
+                alert("Please enter a room ID")
+
+                return
+
+            }
+
+            
+
+
+            // Socket.IO logic will be added here later
+
+        })
+
+        socket.on('Enter-room',(data)=>{
+            console.log('response is',data)
+        })
+
+       
+
+
+        if(name!==null || name!=="")
+        {
+            socket.emit('join-ludo-room',{name:name,roomid:roomid})
+        }
+
+        
+
+    </script>
+
+</body>
+
+</html>
