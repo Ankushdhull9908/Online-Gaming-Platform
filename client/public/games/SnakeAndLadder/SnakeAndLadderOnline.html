@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Snake &amp; Ladder — Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+  <link rel="stylesheet" href="SnakeAndLadderOnline.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <a class="nav-back" href="/Pages/SnakeAndLadder/ModeSelectionSnakeAndLadder/ModeSelectionSnakeAndLadder.html">← Back</a>
+  <div class="nav-logo">
+    <span class="nav-logo-icon">🐍</span>
+    <span class="nav-logo-text">Snake &amp; Ladder</span>
+  </div>
+  <div class="nav-room" id="roomBadge">#——</div>
+</nav>
+
+<!-- GAME -->
+<div class="game-wrap">
+
+  <!-- Board Area -->
+  <div class="board-area">
+
+    <!-- Player avatars -->
+    <div class="players-row" id="playersRow">
+      <!-- filled by JS -->
+    </div>
+
+    <!-- Board -->
+    <div class="board-container">
+      <div class="board" id="board"></div>
+    </div>
+
+  </div>
+
+  <!-- Side Panel -->
+  <div class="side-panel">
+
+    <!-- Turn -->
+    <div class="turn-indicator" id="turnIndicator">
+      <div class="turn-label-sm">Current Turn</div>
+      <div class="turn-name" id="turnName">—</div>
+      <div class="turn-bar-track"><div class="turn-bar-fill" id="turnBar"></div></div>
+    </div>
+
+    <!-- Dice -->
+    <div class="ps">
+      <div class="ps-label">Roll Dice</div>
+      <div class="dice-wrap">
+        <div class="dice" id="dice" onclick="rollDice()">🎲</div>
+        <div class="dice-hint" id="diceHint">Waiting...</div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="status-pill waiting" id="statusPill">⏳ Connecting...</div>
+
+    <!-- Stats -->
+    <div class="ps">
+      <div class="ps-label">My Stats</div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-val" id="myPosVal">—</div>
+          <div class="stat-lbl">Position</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="movesVal">0</div>
+          <div class="stat-lbl">Moves</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:var(--red)" id="snakesVal">0🐍</div>
+          <div class="stat-lbl">Snakes</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" style="color:var(--green)" id="laddersVal">0🪜</div>
+          <div class="stat-lbl">Ladders</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to play -->
+    <div class="ps">
+      <div class="ps-label">How to Play</div>
+      <div style="font-size:0.72rem;color:var(--muted);line-height:1.7">
+        🎲 Roll the dice on your turn<br>
+        🐍 Landing on a snake sends you back<br>
+        🪜 Climbing a ladder moves you up<br>
+        🏆 First to reach 100 wins!<br>
+        <span style="color:var(--yellow)">⚡ Need a 6 to enter the board</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay">
+  <div class="overlay-card">
+    <div class="overlay-icon" id="overlayIcon">⏳</div>
+    <div class="overlay-title" id="overlayTitle">Connecting</div>
+    <div class="overlay-sub" id="overlaySub">Setting up your game...</div>
+    <button class="overlay-btn" id="overlayBtn" style="display:none" onclick="location.href='/Pages/SnakeAndLadder/ModeSelectionSnakeAndLadder/ModeSelectionSnakeAndLadder.html'">Play Again</button>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div id="toasts"></div>
+
+<script src="SnakeAndLadderOnline.js"></script>
+</body>
+</html>

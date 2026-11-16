@@ -1,0 +1,27 @@
+body {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1611996575749-79a3a250f948?q=80&w=1000")
+      no-repeat center center fixed;
+  background-size: cover;
+}
+ 
+.square {
+  height: 100px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #222 !important;
+  transition: all 0.2s;
+}
+
+.square:hover {
+  background-color: #e2e8f0 !important;
+}
+
+.square:disabled {
+  cursor: default;
+  color: #000;
+}

@@ -2,41 +2,7 @@
 
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
-
-const games = [
-  {
-    id: 1,
-    name: 'Ludo King',
-    category: 'BOARD GAME',
-    players: '2-4 Players',
-    image: 'https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=800',
-    color: 'purple'
-  },
-  {
-    id: 2,
-    name: 'Space Shooter',
-    category: 'ACTION',
-    players: 'Single Player',
-    image: 'https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=800',
-    color: 'blue'
-  },
-  {
-    id: 3,
-    name: 'Memory Match',
-    category: 'PUZZLE',
-    players: 'Single Player',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800',
-    color: 'pink'
-  },
-  {
-    id: 4,
-    name: 'Snake & Ladder',
-    category: 'CLASSIC',
-    players: '2-4 Players',
-    image: 'https://images.unsplash.com/photo-1606503153255-59d8b8b8219a?w=800',
-    color: 'orange'
-  }
-]
+import { games } from '../Games.js'
 
 function Home() {
   const nav = useNavigate()
@@ -155,7 +121,7 @@ function Home() {
                 <img src={game.image} alt={game.name} />
 
                 <span className="game-category">
-                  {game.category}
+                  Board
                 </span>
               </div>
 
@@ -163,13 +129,13 @@ function Home() {
 
                 <div>
                   <h3>{game.name}</h3>
-                  <p>👥 {game.players}</p>
+                  <p>👥 2-4</p>
                 </div>
 
                 <button
                   className="game-play-btn"
                   onClick={() => {
-                    nav('/loadgame')
+                    nav(`/loadgame/${game.id}`)
                   }}
                 >
                   Play ↗
