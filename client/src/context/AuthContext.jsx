@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext()
 
-const API = 'http://localhost:5000/api'
+
+const API = window.location.hostname=== "localhost" ? 'http://localhost:5000/api' : 'https://online-gaming-platform-1zcz.onrender.com/api'
+
 
 export function AuthProvider({ children }) {
 
