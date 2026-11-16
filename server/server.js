@@ -18,7 +18,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth',authRoutes)
 app.use('/api/image',imageRoutes)
-app.get('/',(req,res)=> console.log('API running'))
+
 
 const server = http.createServer(app);
 initSocket(server);
