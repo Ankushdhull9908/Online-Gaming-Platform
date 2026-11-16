@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
   // CHECK WHETHER USER IS ALREADY LOGGED IN
 
   const checkAuth = async () => {
+    setLoading(true)
 
     try {
 
@@ -69,6 +70,7 @@ export function AuthProvider({ children }) {
       if (!response.ok) {
         throw new Error(data.message || 'Signup failed')
       }
+      setLoading(false)
 
       console.log('data',data)
 
@@ -107,6 +109,7 @@ export function AuthProvider({ children }) {
       console.log('login data',data)
 
       setUser(data.playerData)
+      nav('/')
 
       return data
 

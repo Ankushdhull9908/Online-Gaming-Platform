@@ -1,10 +1,13 @@
 
 import './Navbar.css'
 import { useAuth } from '../context/AuthContext'
+import loadinggif from '../assets/loadingGIF.gif'
 
 function Navbar() {
 
-    const {user} = useAuth()
+
+    const {user,loading} = useAuth()
+    
     
   return (
     <nav className="gaming-navbar">
@@ -20,8 +23,8 @@ function Navbar() {
         <a href="/#about">About</a>
         <a href="/#leaderboard">Leaderboard</a>
       </div>
-
-{
+      {
+        loading? <img src={loadinggif} style={{height:'10vh',width:'auto'}}/> : (
   !user ? <div className="nav-actions">
         <a href="/login" className="nav-login">
           Login
@@ -33,7 +36,10 @@ function Navbar() {
       </div> : <a href="/profile" className="nav-login">
           {user.username}
         </a>
-}
+)
+      }
+
+
       
 
     </nav>
