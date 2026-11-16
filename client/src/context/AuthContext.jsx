@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
 
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [loginLoading,setLoginLoading]=  useState(false)
   const nav = useNavigate()
   console.log('user data',user)
 
@@ -53,6 +54,7 @@ export function AuthProvider({ children }) {
   // SIGNUP
 
   const signup = async (formData) => {
+    setLoginLoading(true)
 
     try {
 
@@ -70,7 +72,7 @@ export function AuthProvider({ children }) {
       if (!response.ok) {
         throw new Error(data.message || 'Signup failed')
       }
-      setLoading(false)
+      setLoginLoading(false)
 
       console.log('data',data)
 
@@ -89,6 +91,7 @@ export function AuthProvider({ children }) {
   // LOGIN
 
   const login = async (formData) => {
+    setLoginLoading(true)
 
     try {
 
@@ -106,6 +109,7 @@ export function AuthProvider({ children }) {
       if (!response.ok) {
         throw new Error(data.message || 'Login failed')
       }
+      setLoginLoading(false)
       console.log('login data',data)
 
       setUser(data.playerData)
@@ -170,7 +174,8 @@ export function AuthProvider({ children }) {
         signup,
         login,
         logout,
-        checkAuth
+        checkAuth,
+        loginLoading
       }}
     >
 

@@ -24,7 +24,7 @@ function Navbar() {
         <a href="/#leaderboard">Leaderboard</a>
       </div>
       {
-        loading? <img src={loadinggif} style={{height:'5vh',width:'auto'}}/> : (
+        loading? <img src={loadinggif} style={{height:'3vh',width:'auto'}}/> : (
   !user ? <div className="nav-actions">
         <a href="/login" className="nav-login">
           Login

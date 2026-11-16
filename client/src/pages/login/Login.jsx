@@ -4,9 +4,10 @@ import './login.css'
 import { useAuth } from '../../context/AuthContext'
 
 function Login() {
-  const {login,signup}  =useAuth()
+  const {login,signup,loginLoading}  =useAuth()
 
   const [isLogin, setIsLogin] = useState(true)
+  //const loginLoading = true
   const [showPassword, setShowPassword] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -285,9 +286,12 @@ function Login() {
 
               <button type="submit" className="auth-submit">
 
-                {isLogin ? 'ENTER THE GAME' : 'CREATE MY ACCOUNT'}
-
-                <span> ↗</span>
+                {
+                  loginLoading ? '...Just a Moment bro' : (isLogin ? 'ENTER THE GAME' : 'CREATE MY ACCOUNT')
+                }
+                
+               <span> ↗</span>
+                
 
               </button>
 
