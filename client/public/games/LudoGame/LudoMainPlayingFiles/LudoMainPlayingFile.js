@@ -1,7 +1,7 @@
-import API from "../../../../src/API"
+import { SOCKET_URL } from '/API.js';
 
 
-const socket = io(API)
+const socket = io(SOCKET_URL)
 
 const params = new URLSearchParams(window.location.search)
 

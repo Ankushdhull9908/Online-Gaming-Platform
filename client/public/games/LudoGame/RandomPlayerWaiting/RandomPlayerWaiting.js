@@ -1,5 +1,7 @@
-import API from '../../../../src/API'
-const socket = io(API)
+import { SOCKET_URL } from '/API.js';
+
+const socket = io(SOCKET_URL);
+
 const username = JSON.parse(localStorage.getItem('player'))
 
 if(username){
