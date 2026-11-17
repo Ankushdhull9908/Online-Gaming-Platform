@@ -1,0 +1,147 @@
+
+.theme-page {
+  min-height: 100vh;
+  padding: 50px 7%;
+  background-color: var(--bg-color);
+  color: var(--text);
+  transition: 0.3s ease;
+}
+
+.theme-heading {
+  margin-bottom: 35px;
+}
+
+.theme-heading h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.theme-heading p {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.theme-card {
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: var(--card-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.theme-card:hover {
+  transform: translateY(-5px);
+}
+
+.theme-preview {
+  height: 180px;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.preview-navbar {
+  height: 35px;
+  padding: 0 12px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.preview-dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.preview-content {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.preview-box {
+  width: 65%;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.preview-line {
+  height: 7px;
+  width: 80%;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 8px;
+}
+
+.preview-line.small {
+  width: 45%;
+}
+
+.preview-box button {
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.theme-info {
+  padding: 18px;
+}
+
+.theme-info h3 {
+  margin: 0 0 7px;
+  font-size: 20px;
+}
+
+.theme-info p {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+.color-dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.color-dots span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.apply-theme-btn {
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--btn);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.apply-theme-btn:hover {
+  opacity: 0.85;
+}
+
+.apply-theme-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}

@@ -1,11 +1,15 @@
 
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link} from 'react-router-dom'
 import './Home.css'
 import { games } from '../Games.js'
+//import RewardPopup from "../../components/RewardPopup.jsx";
+import { useState } from 'react';
 
 function Home() {
+   const [showReward, setShowReward] = useState(true);
   const nav = useNavigate()
+  
   return (
     <div className="home-page">
 
@@ -19,6 +23,7 @@ function Home() {
             <span className="live-dot"></span>
             THE ULTIMATE GAMING DESTINATION
           </div>
+          
 
           <h1>
             LEVEL UP YOUR
@@ -41,6 +46,7 @@ function Home() {
               Join Community
             </a>
           </div>
+          
 
           <div className="hero-stats">
             <div>
@@ -169,9 +175,9 @@ function Home() {
             start your journey to the top of the leaderboard.
           </p>
 
-          <a href="/login" className="community-btn">
+          <Link to='/login' className="community-btn">
             Start Playing Now ↗
-          </a>
+          </Link>
 
         </div>
 
@@ -185,9 +191,9 @@ function Home() {
 
       <footer className="gaming-footer">
 
-        <a href="/" className="nav-logo">
+        <Link to="/" className="nav-logo">
           ⚡ PLAY<span>VERSE</span>
-        </a>
+        </Link>
 
         <p>© 2026 PlayVerse. Made for gamers, by gamers.</p>
 
