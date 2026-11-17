@@ -97,7 +97,7 @@
       grid-template-columns: repeat(10, 56px);
       grid-template-rows: repeat(10, 56px);
       background: #fff;
-      background-image: url('../../Assets/SnakeAndLadderAssets/board.jpg');
+      background-image: url('../SnakeAndLadderAssets/board.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       border-radius: 8px;
@@ -417,7 +417,7 @@
       grid-template-columns: repeat(10, var(--cell));
       grid-template-rows: repeat(10, var(--cell));
       background: #fff;
-      background-image: url('../../Assets/SnakeAndLadderAssets/board.jpg');
+      background-image: url('../SnakeAndLadderAssets/board.jpg');
       background-size: cover;
       background-repeat: no-repeat;
       border-radius: 8px;
@@ -628,9 +628,7 @@
        ═══════════════════════════════════════════════ */
 
     /* ── Large desktop (≥1200px): default 56px cells ── */
-    @media (min-width: 1200px) {
-      --cell: 56px;
-    }
+    
 
     /* ── Medium desktop / tablet landscape (900–1199px) ── */
     @media (max-width: 1199px) and (min-width: 900px) {

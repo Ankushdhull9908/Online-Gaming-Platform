@@ -1,7 +1,8 @@
 
 // ── CONFIG ───────────────────────────────────────────
-import API from "../../API";
-const SERVER = API
+import {SOCKET_URL} from '/API.js'
+
+const SERVER = SOCKET_URL
 console.log('server',SERVER)
 const DICE_EMOJI = { 1:'⚀', 2:'⚁', 3:'⚂', 4:'⚃', 5:'⚄', 6:'⚅' };
 const MY_PIECE  = '🔴';
@@ -12,12 +13,16 @@ const RULES = {
   4:25, 9:31, 20:38, 28:84, 40:59, 51:67, 63:81, 71:91
 };
 
+
+
 // ── URL PARAMS ───────────────────────────────────────
 const params    = new URLSearchParams(window.location.search);
 const MODE      = params.get('mode');
 const ROOM_ID   = params.get('id');
 const MY_DB_ID  = params.get('dbId');
 const MY_INGAME = params.get('ingameId') || 'Guest';
+
+console.log('mode',MODE)
 
 // ── STATE ────────────────────────────────────────────
 let myId          = null;

@@ -4,6 +4,12 @@ export const games = [{
     src:'/games/LudoGame/LudoModeSelection/LudoModeSelection.html',
     id:1
 },{
+    name:"Snake And Ladder",
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAHqhjKGLdIV2EKM8qicIJQiokP5qRf_hCcjL4nQF65w&s",
+    src:'/games/SnakeAndLadder/ModeSelectionSnakeAndLadder/ModeSelectionSnakeAndLadder.html',
+    id:6
+},
+{
     name:"Snake",
     image:"https://www.coolmathgames.com/sites/default/files/Snake_OG-logo.jpg",
     src:'/games/snake/index.html',
@@ -15,12 +21,12 @@ export const games = [{
     id:3
 },{
     name:"Tic Tac Toe",
-    image:"https://play-lh.googleusercontent.com/5UzZrzlDMP1Fs8-VE8DyGYDfa8al6UJ5PEQBP5SqawdGDsfxw3C99h0OjmuHsXKUoI5zoA1c6ZAThWeq07yg9g",
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRABJUPjFwoAIJaLZPyswAh_PVpOjEmus1kxkEtYvjEgw&s",
     src:'/games/TicTacToe/TicTacToe.html',
     id:4
 },{
     name:"Memory Match",
-    image:"https://play-lh.googleusercontent.com/vnZp-lchly_etUyNHxRXYp_EL0r2CP3G-tuFmpzX9AAQgfi6COKAF1TfTJ_UN6sd-4Oy9kZm5OSLtB1Dlxeu",
+    image:"https://funskoolindia.com/wp-content/uploads/2024/09/M-M-Memory-5.jpg",
     src:'/games/MemoryMatch/MemoryMatch.html',
     id:5
 }]

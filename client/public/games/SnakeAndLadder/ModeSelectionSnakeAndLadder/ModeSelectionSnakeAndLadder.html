@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake & Ladder — Select Mode</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0e1a;
+      --card:    #111827;
+      --border:  rgba(255,255,255,0.08);
+      --green:   #2ecc71;
+      --yellow:  #f1c40f;
+      --blue:    #3498db;
+      --purple:  #9b59b6;
+      --text:    #e8edf2;
+      --muted:   #6b7280;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Nunito', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── STAR CANVAS ── */
+    #stars { position: fixed; inset: 0; z-index: 0; }
+
+    /* ── FLOATING SNAKE ICONS ── */
+    .floater {
+      position: fixed; font-size: 1.6rem; z-index: 1;
+      animation: floatDrift linear infinite;
+      opacity: 0.18; pointer-events: none;
+      filter: blur(0.5px);
+    }
+    @keyframes floatDrift {
+      0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0; }
+      10%  { opacity: 0.18; }
+      90%  { opacity: 0.12; }
+      100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page {
+      position: relative; z-index: 2;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0;
+      padding: 1rem;
+    }
+
+    /* ── LOGO SECTION ── */
+    .logo-wrap {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fadeDown 0.7s ease both;
+    }
+    .logo-snake {
+      font-size: 4rem; line-height: 1;
+      filter: drop-shadow(0 0 20px rgba(46,204,113,0.6));
+      animation: snakeBob 3s ease-in-out infinite;
+    }
+    @keyframes snakeBob {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-10px) rotate(5deg); }
+    }
+    .logo-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, var(--yellow) 0%, #e67e22 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 30px rgba(241,196,15,0.4));
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MODE GRID ── */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+      width: 100%; max-width: 520px;
+    }
+    .mode-grid .card-random {
+      grid-column: 1 / -1; /* full width bottom */
+    }
+
+    /* ── MODE CARD ── */
+    .mode-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 22px 20px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      animation: cardPop 0.5s ease both;
+      position: relative; overflow: hidden;
+      text-decoration: none;
+    }
+    .mode-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, var(--glow) 0%, transparent 70%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .mode-card:hover { transform: translateY(-4px); }
+    .mode-card:hover::before { opacity: 1; }
+
+    .card-local   { --glow: rgba(46,204,113,0.25);  animation-delay: 0.1s; }
+    .card-friend  { --glow: rgba(52,152,219,0.25);  animation-delay: 0.2s; }
+    .card-random  { --glow: rgba(155,89,182,0.25);  animation-delay: 0.3s; }
+
+    .card-local:hover  { border-color: var(--green);  box-shadow: 0 8px 32px rgba(46,204,113,0.2); }
+    .card-friend:hover { border-color: var(--blue);   box-shadow: 0 8px 32px rgba(52,152,219,0.2); }
+    .card-random:hover { border-color: var(--purple);  box-shadow: 0 8px 32px rgba(155,89,182,0.2); }
+
+    @keyframes cardPop {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to   { opacity: 1; transform: scale(1)   translateY(0); }
+    }
+
+    .card-icon {
+      font-size: 2.4rem;
+      width: 64px; height: 64px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s;
+    }
+    .mode-card:hover .card-icon { transform: scale(1.12) rotate(-5deg); }
+
+    .card-name {
+      font-weight: 800; font-size: 1rem;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+    .card-local  .card-name { color: var(--green); }
+    .card-friend .card-name { color: var(--blue); }
+    .card-random .card-name { color: var(--purple); }
+
+    .card-desc {
+      font-size: 0.72rem; color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* random card horizontal inside */
+    .card-random .card-inner {
+      display: flex; align-items: center; gap: 18px;
+      width: 100%;
+    }
+    .card-random .card-text { text-align: left; }
+    .card-random .card-desc { margin-top: 2px; }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      margin-top: 1.5rem;
+      color: var(--muted); font-size: 0.82rem;
+      cursor: pointer; background: none; border: none;
+      font-family: 'Nunito', sans-serif;
+      transition: color 0.2s;
+      animation: fadeDown 0.7s 0.5s ease both; opacity: 0;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── ROOM MODAL ── */
+    .modal-bg {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-box {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 32px 28px;
+      width: 90%; max-width: 380px; text-align: center;
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: 3px;
+      color: var(--blue); margin-bottom: 6px;
+    }
+    .modal-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; }
+    .modal-input {
+      width: 100%; padding: 12px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; color: var(--text);
+      font-size: 1rem; font-family: 'Nunito', sans-serif;
+      outline: none; margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .modal-input:focus { border-color: var(--blue); }
+    .modal-input::placeholder { color: var(--muted); }
+    .modal-room-display {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem; letter-spacing: 8px;
+      color: var(--yellow);
+      background: rgba(241,196,15,0.07);
+      border: 1px dashed rgba(241,196,15,0.3);
+      border-radius: 10px; padding: 12px;
+      margin-bottom: 16px; cursor: pointer;
+      transition: background 0.2s;
+      user-select: all;
+    }
+    .modal-room-display:hover { background: rgba(241,196,15,0.12); }
+    .copy-hint { font-size: 0.68rem; color: var(--muted); margin-bottom: 16px; }
+    .modal-btn-row { display: flex; gap: 10px; }
+    .modal-btn {
+      flex: 1; padding: 12px;
+      border-radius: 10px; border: none;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.85rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .modal-btn.primary {
+      background: var(--blue); color: #fff;
+    }
+    .modal-btn.primary:hover { background: #2980b9; }
+    .modal-btn.ghost {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted); border: 1px solid rgba(255,255,255,0.1);
+    }
+    .modal-btn.ghost:hover { color: var(--text); }
+    .modal-divider {
+      display: flex; align-items: center; gap: 10px;
+      margin: 16px 0; color: var(--muted); font-size: 0.75rem;
+    }
+    .modal-divider::before, .modal-divider::after {
+      content: ''; flex: 1;
+      height: 1px; background: rgba(255,255,255,0.08);
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- Floating emojis -->
+<div class="floater" style="left:8%;  animation-duration:18s; animation-delay:0s;  font-size:1.2rem;">🐍</div>
+<div class="floater" style="left:20%; animation-duration:22s; animation-delay:4s;  font-size:2rem;">🎲</div>
+<div class="floater" style="left:35%; animation-duration:16s; animation-delay:8s;  font-size:1rem;">🪜</div>
+<div class="floater" style="left:55%; animation-duration:24s; animation-delay:2s;  font-size:1.4rem;">🐍</div>
+<div class="floater" style="left:72%; animation-duration:19s; animation-delay:6s;  font-size:1.8rem;">🎲</div>
+<div class="floater" style="left:88%; animation-duration:21s; animation-delay:10s; font-size:1rem;">🪜</div>
+
+<div class="page">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <div class="logo-snake">🐍</div>
+    <div class="logo-title">Snake &amp; Ladder</div>
+    <div class="logo-sub">Multiplayer Edition</div>
+  </div>
+
+  <!-- Mode Grid -->
+  <div class="mode-grid">
+
+    <!-- Local -->
+    <div class="mode-card card-local" onclick="goLocal()">
+      <div class="card-icon">🏠</div>
+      <div class="card-name">Local</div>
+      <div class="card-desc">Play on the same device with a friend</div>
+    </div>
+
+    <!-- Friend Online -->
+    <div class="mode-card card-friend" onclick="openFriendModal()">
+      <div class="card-icon">🔗</div>
+      <div class="card-name">Friend</div>
+      <div class="card-desc">Create or join a private room</div>
+    </div>
+
+    <!-- Random Match — full width -->
+    <div class="mode-card card-random" onclick="goRandom()">
+      <div class="card-inner">
+        <div class="card-icon">🌍</div>
+        <div class="card-text">
+          <div class="card-name">Random Match</div>
+          <div class="card-desc">Get matched with a random online player instantly</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="back-link" onclick="goBack()">← Back to Menu</button>
+</div>
+
+<!-- Friend Room Modal -->
+<div class="modal-bg" id="friendModal">
+  <div class="modal-box">
+    <div class="modal-title">Play With Friend</div>
+    <div class="modal-sub">Create a new room or join with a code</div>
+
+    <!-- Generated room code -->
+    <div class="modal-room-display" id="roomCodeDisplay" title="Click to copy" onclick="copyCode()">——</div>
+    <div class="copy-hint">👆 Share this code with your friend · click to copy</div>
+
+    <button class="modal-btn primary" style="width:100%;margin-bottom:12px" onclick="hostRoom()">
+      🎮 Create Room &amp; Wait
+    </button>
+
+    <div class="modal-divider">or join existing</div>
+
+    <input class="modal-input" id="joinInput" placeholder="Enter room code e.g. 7342" maxlength="6" type="number">
+    <div class="modal-btn-row">
+      <button class="modal-btn primary" onclick="joinRoom()">Join Room</button>
+      <button class="modal-btn ghost"   onclick="closeFriendModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STAR FIELD ────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('stars');
+  const ctx    = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: 140 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.4 + 0.2,
+      a: Math.random(),
+      speed: Math.random() * 0.4 + 0.1
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.a += s.speed * 0.01;
+      const alpha = (Math.sin(s.a) + 1) / 2 * 0.8 + 0.1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize(); draw();
+})();
+
+// ── PLAYER SESSION ────────────────────────────────────
+const _session  = JSON.parse(localStorage.getItem('player') || '{}');
+const MY_DB_ID  = _session._id || _session.id || null;
+const MY_INGAME = _session.ingameId || 'Guest';
+
+// ── NAVIGATION ────────────────────────────────────────
+function goBack() {
+  window.location.href = '/index.html';
+}
+
+function goLocal() {
+  window.location.href = `/Pages/SnakeAndLadder/SnakeAndLadder.html?mode=local`;
+}
+
+function goRandom() {
+  window.location.href = `../SnakeAndLadderOnline/SnakeAndLadderOnline.html?mode=random&dbId=${MY_DB_ID}&ingameId=${MY_INGAME}`;
+}
+
+// ── FRIEND MODAL ──────────────────────────────────────
+let generatedCode = null;
+
+function openFriendModal() {
+  generatedCode = Math.floor(1000 + Math.random() * 9000).toString();
+  document.getElementById('roomCodeDisplay').textContent = generatedCode;
+  document.getElementById('joinInput').value = '';
+  document.getElementById('friendModal').classList.add('open');
+}
+
+function closeFriendModal() {
+  document.getElementById('friendModal').classList.remove('open');
+}
+
+function copyCode() {
+  if (!generatedCode) return;
+  navigator.clipboard.writeText(generatedCode).then(() => {
+    const el = document.getElementById('roomCodeDisplay');
+    const orig = el.textContent;
+    el.textContent = 'COPIED!';
+    setTimeout(() => el.textContent = orig, 1200);
+  });
+}
+
+function hostRoom() {
+  if (!generatedCode) return;
+  window.location.href =
+        `../SnakeAndLadder/SnakeAndLadderOnline.html?mode=online&id=${generatedCode}&dbId=${MY_DB_ID}&ingameId=${MY_INGAME}`;
+}
+
+function joinRoom() {
+  const code = document.getElementById('joinInput').value.trim();
+  if (!code) { document.getElementById('joinInput').focus(); return; }
+  window.location.href = `../SnakeAndLadder/SnakeAndLadderOnline.html?mode=online&id=${code}&dbId=${MY_DB_ID}&ingameId=${MY_INGAME}`;
+}
+
+// Close modal on backdrop click
+document.getElementById('friendModal').addEventListener('click', function(e) {
+  if (e.target === this) closeFriendModal();
+});
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 
 import Ludo from "../games/Ludo.js";
-
+import SnakeAndLadder from "../games/SnakeAndLadder.js";
 /**
  * Boots the shared socket.io server and routes each connection to the
  * correct per-game module based on the 'join-games-server' handshake.
@@ -17,6 +17,7 @@ export function initSocket(server) {
     console.log("Connected:", socket.id);
 
     socket.on("join-games-server", (data = {}) => {
+      console.log('data')
       switch (data.game) {
         case "SnakeAndLadder":
           SnakeAndLadder(io, socket, data);
