@@ -7,6 +7,7 @@ import PlayerDashboard from './pages/dashboard/PlayerDashboard'
 import LoadGame from "./pages/game/LoadGame";
 import Themes from "./pages/themes/Themes";
 import Shop from "./pages/shop/Shop";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
 
     <>
     <Navbar/>
+    <ScrollToTop/>
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
