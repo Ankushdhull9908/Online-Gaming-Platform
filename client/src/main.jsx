@@ -10,13 +10,15 @@ import { ShopProvider } from './context/ShopContext.jsx'
 createRoot(document.getElementById('root')).render(
   
     <BrowserRouter>
-    <ShopProvider>
+    
     <ThemeProvider>
     <AuthProvider>
+      <ShopProvider>
     <App />
+    </ShopProvider>
     </AuthProvider>
     </ThemeProvider>
-    </ShopProvider>
+    
     </BrowserRouter>
   ,
 )

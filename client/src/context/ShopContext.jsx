@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
+import { useAuth } from "./AuthContext";
+
 
 const shopContext = createContext()
 const API = window.location.hostname === "localhost"
@@ -13,6 +15,7 @@ const API = window.location.hostname === "localhost"
 export function ShopProvider({children})
 {
     const [coinpack,setcoinpack]=useState([])
+    const {setUser} = useAuth()
     
 
 
@@ -63,10 +66,7 @@ export function ShopProvider({children})
             handler: function (paymentResponse) {
 
                 console.log("Payment successful!");
-                console.log(paymentResponse);
-
-                // Next step: send these details
-                // to backend for verification.
+                if(paymentResponse) confirmPayment({...paymentResponse,id:packid})
             },
 
             theme: {
@@ -86,6 +86,34 @@ export function ShopProvider({children})
         {
             console.log('error',e)
         }
+    }
+
+    async function confirmPayment(razorpayData)
+    {
+        console.log('razor data',razorpayData)
+       try{
+            const res = await fetch(`${API}/shop/confirm-payment`,{
+                method:"POST",
+                credentials:"include",
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(razorpayData)
+            })
+
+            if(res)
+            {
+                const data = await res.json()
+                console.log('data',data)
+                setUser(data.playerData)
+
+            }
+
+        }catch(e)
+        {
+            console.log(e)
+        }
+
     }
 
 

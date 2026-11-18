@@ -1,5 +1,6 @@
 import razorpay from "../config/razorpay.js"
 import 'dotenv/config'
+import player from "../models/PlayerSchema.js"
 
 const coinpack = [
     {
@@ -93,4 +94,38 @@ export async function purchaseCoinPack(req,res)
         });
 
     }
+}
+
+export async function confirmPayment(req,res)
+{
+      try{
+       // if(req.body.)
+       if(!req.body.razorpay_payment_id || !req.body.razorpay_order_id || !req.body.razorpay_signature)
+       {
+        return res.json({error:"missing details"})
+       }
+      
+
+       const exist = await player.findOne({_id:req.user.data.id})
+
+       if(!exist)
+       {
+        return res.json({error:"no such user"})
+       }
+       const coinpackResult = coinpack.find((i)=> i.id===req.body.id)
+
+
+       console.log('coin pack results',coinpackResult)
+
+       const data = await player.findByIdAndUpdate(req.user.data.id,{$inc:{coins:coinpackResult.coins}}, { returnDocument: 'after' })
+
+       res.json({success:"Task successfull",playerData:{username:data.playerIngameId,xp:data.xp,playerprofile:data.playerprofile,coins:data.coins}})
+
+
+      }catch(e)
+      {
+        console.log(e)
+      }
+
+
 }
