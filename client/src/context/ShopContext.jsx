@@ -6,7 +6,7 @@ import { createContext } from "react";
 const shopContext = createContext()
 const API = window.location.hostname === "localhost"
   ? 'http://localhost:5000/api'
-  : '/api'
+  : 'https://online-gaming-platform-1zcz.onrender.com/api'
 
 
 
