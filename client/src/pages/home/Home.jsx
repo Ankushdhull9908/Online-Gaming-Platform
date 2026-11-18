@@ -4,11 +4,73 @@ import { useNavigate,Link} from 'react-router-dom'
 import './Home.css'
 import { games } from '../Games.js'
 //import RewardPopup from "../../components/RewardPopup.jsx";
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
+
+
+const slides = [
+  {
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200",
+    title: "ENTER THE ARENA",
+    subtitle: "Compete. Conquer. Become a legend.",
+    tag: "COMPETITIVE GAMING"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200",
+    title: "YOUR NEXT ADVENTURE",
+    subtitle: "Discover exciting games and endless fun.",
+    tag: "EXPLORE GAMES"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1200",
+    title: "LEVEL UP YOUR GAME",
+    subtitle: "Challenge your friends and show your skills.",
+    tag: "PLAY WITH FRIENDS"
+  },
+  {
+    image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?w=1200",
+    title: "GAME ON!",
+    subtitle: "Every match is a new opportunity to win.",
+    tag: "WELCOME TO PLAYVERSE"
+  }
+];
+
 
 function Home() {
    const [showReward, setShowReward] = useState(true);
   const nav = useNavigate()
+
+
+const [currentSlide, setCurrentSlide] = useState(0);
+
+// Automatically change image after 5 seconds
+useEffect(() => {
+
+  const interval = setInterval(() => {
+
+    setCurrentSlide((previous) => {
+
+      if (previous === slides.length - 1) {
+        return 0;
+      }
+
+      return previous + 1;
+
+    });
+
+  }, 5000);
+
+  return () => clearInterval(interval);
+
+}, []);
+
+function nextSlide() {
+  setCurrentSlide((currentSlide + 1) % slides.length);
+}
+
+function previousSlide() {
+  setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
+}
+
   
   return (
     <div className="home-page">
@@ -67,35 +129,90 @@ function Home() {
 
         </div>
 
-        <div className="hero-visual">
+        
+<div className="hero-visual">
 
-          <div className="hero-glow"></div>
+  <div className="hero-glow"></div>
 
-          <div className="hero-image-container">
-            <img
-              src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1000"
-              alt="Gaming setup"
-            />
+  <div className="hero-slider">
 
-            <div className="floating-card floating-top">
-              <span>🏆</span>
-              <div>
-                <strong>Top Player</strong>
-                <small>Become a champion</small>
-              </div>
-            </div>
+    {/* Current slide image */}
 
-            <div className="floating-card floating-bottom">
-              <span>🎮</span>
-              <div>
-                <strong>Ready to Play?</strong>
-                <small>Your next adventure awaits</small>
-              </div>
-            </div>
+    <img
+      key={currentSlide}
+      className="slider-image"
+      src={slides[currentSlide].image}
+      alt="Gaming experience"
+    />
 
-          </div>
+    <div className="slider-overlay"></div>
 
-        </div>
+    {/* Slide content */}
+
+    <div className="slider-content">
+
+      <span className="slider-tag">
+        <span className="live-dot"></span>
+        {slides[currentSlide].tag}
+      </span>
+
+      <h2>{slides[currentSlide].title}</h2>
+
+      <p>{slides[currentSlide].subtitle}</p>
+
+      <a href="#games" className="slider-play-btn">
+        Explore Games ↗
+      </a>
+
+    </div>
+
+    {/* Slide counter */}
+
+    <div className="slider-counter">
+      <span>0{currentSlide + 1}</span>
+      <span className="counter-line"></span>
+      <span>0{slides.length}</span>
+    </div>
+
+    {/* Navigation arrows */}
+
+    <div className="slider-arrows">
+
+      <button onClick={previousSlide} aria-label="Previous slide">
+        ←
+      </button>
+
+      <button onClick={nextSlide} aria-label="Next slide">
+        →
+      </button>
+
+    </div>
+
+    {/* Pagination dots */}
+
+    <div className="slider-dots">
+
+      {slides.map((slide, index) => (
+
+        <button
+          key={index}
+          className={currentSlide === index ? "slider-dot active" : "slider-dot"}
+          onClick={() => setCurrentSlide(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+
+      ))}
+
+    </div>
+
+  </div>
+
+  <div className="slider-floating-card">
+    🏆 <span>YOUR NEXT VICTORY AWAITS</span>
+  </div>
+
+</div>
+
 
       </section>
 

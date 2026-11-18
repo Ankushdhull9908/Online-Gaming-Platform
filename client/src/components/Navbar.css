@@ -21,6 +21,16 @@
   font-family: var(--font-family);
 }
 
+.coins{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: var(--primary-text-color);
+
+}
 /* LOGO */
 
 .nav-logo {

@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken'
 export async function VerifyUser(req,res,next)
 {
    const token = req.cookies.token
+
+   
    if(!token)
    {
     return res.json({message:"No token"})

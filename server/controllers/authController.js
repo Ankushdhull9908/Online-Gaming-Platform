@@ -21,7 +21,8 @@ export async function signup(req,res)
             email:req.body.email,
             password:hashpass,
             playerprofile:req.body.playerprofile,
-            xp:req.body.xp
+            xp:0,
+            coins:500
         })
         return res.status(201).json({
             success: "User registered successfully"
@@ -69,7 +70,7 @@ export async function login(req,res)
     maxAge: 7 * 24 * 60 * 60 * 1000
 })
 
-        res.json({success:"Login successfull",playerData:{username:user.playerIngameId,xp:user.xp,playerprofile:user.playerprofile}})
+        res.json({success:"Login successfull",playerData:{username:user.playerIngameId,xp:user.xp,playerprofile:user.playerprofile,coins:user.coins}})
 
     }catch(e)
     {
@@ -82,9 +83,7 @@ export async function checkAuth(req,res)
     
     const user = await player.findOne({_id:req.user.data.id})
 
-    //console.log(user)
-    
-    res.json({success:"login successfull",playerData:{username:user.playerIngameId,xp:user.xp,playerprofile:user.playerprofile}})
+    res.json({success:"login successfull",playerData:{username:user.playerIngameId,xp:user.xp,playerprofile:user.playerprofile,coins:user.coins}})
 }
 export function logout(req,res)
 {

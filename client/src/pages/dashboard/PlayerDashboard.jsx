@@ -263,10 +263,10 @@ const [uploadError, setUploadError] = useState('')
 
           <div className="pd-hero-meta">
             <span className="pd-chip">
-              🪙 <b>{player.coins.toLocaleString()}</b> coins
+              🪙 <b>{user?.coins.toLocaleString()}</b> coins
             </span>
             <span className="pd-chip">
-              ⚡ <b>{xp.toLocaleString()}</b> XP
+              ⚡ <b>{user?.xp}</b> XP
             </span>
             <span className="pd-chip">
               📅 Since <b>{player.createdAt}</b>
@@ -286,12 +286,12 @@ const [uploadError, setUploadError] = useState('')
           <div className="pd-xp-row">
             <div className="pd-xp-labels">
               <span>XP Progress</span>
-              <span>{xpInLevel} / 1000</span>
+              <span>{0} / 1000</span>
             </div>
             <div className="pd-xp-track">
               <div
                 className="pd-xp-fill"
-                style={{ width: `${xpPercent}%` }}
+                style={{ width: `${0}%` }}
               />
             </div>
           </div>

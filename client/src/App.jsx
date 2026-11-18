@@ -6,6 +6,7 @@ import Login from "./pages/login/Login";
 import PlayerDashboard from './pages/dashboard/PlayerDashboard'
 import LoadGame from "./pages/game/LoadGame";
 import Themes from "./pages/themes/Themes";
+import Shop from "./pages/shop/Shop";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path="/profile" element={<PlayerDashboard/>}/>
       <Route path="/loadgame/:id" element={<LoadGame/>}/>
       <Route path="/themes" element={<Themes/>}/>
+      <Route path="/shop" element={<Shop/>}/>
     
     </Routes>
     

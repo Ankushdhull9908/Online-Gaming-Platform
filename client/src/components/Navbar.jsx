@@ -3,6 +3,8 @@ import './Navbar.css'
 import { useAuth } from '../context/AuthContext'
 import loadinggif from '../assets/loadingGIF.gif'
 import { Link, NavLink } from 'react-router-dom'
+import coins from '../assets/coins.png'
+import shop from '../assets/shop.png'
 
 function Navbar() {
   const { user, loading } = useAuth()
@@ -47,9 +49,18 @@ function Navbar() {
           </div>
         ) : (
           <>
+            <div className='coins'>
+             <img src={coins} alt='coins' height={'20px'} width={'auto'}/>
+             <p>{user.coins}</p>
+            </div>
+            <Link to="/shop" className="nav-theme-link">
+              <img src={shop} alt='shop' height={'30px'} width={'auto'}/>
+              <p>Shop</p>
+            </Link>
             <Link to="/themes" className="nav-theme-link">
               <span>✦</span> Themes
             </Link>
+            
 
             <Link to="/profile" className="nav-user">
 

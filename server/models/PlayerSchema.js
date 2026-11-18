@@ -18,8 +18,13 @@ const playerSchema = mongoose.Schema({
     playerprofile:{
         type:String,
     },
+    coins:{
+        type:Number,
+        required:true
+    },
     xp:{
-        type:Number
+        type:Number,
+        required:true
     }
 })
 

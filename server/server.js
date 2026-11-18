@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import { initSocket } from "./socket/socket.js";
 import imageRoutes from './routes/imageRoute.js'
 import http from "http";
+import coinpackRoutes from './routes/coinpackRoutes.js'
 mongodb()
 
 const app = express()
@@ -18,6 +19,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth',authRoutes)
 app.use('/api/image',imageRoutes)
+app.use('/api/shop',coinpackRoutes)
 
 
 const server = http.createServer(app);
