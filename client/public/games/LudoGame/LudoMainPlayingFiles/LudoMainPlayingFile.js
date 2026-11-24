@@ -122,7 +122,7 @@ LoadLudoBoard()
 console.log(myturn)
 if(username)
 {
-    socket.emit('join-games-server',{name:username.ingameId,game:'Ludo'})
+    socket.emit('join-games-server',{name:username.username,game:'Ludo'})
 
     if(roomid) socket.emit('join-room',{name:username,roomid:roomid})
 }

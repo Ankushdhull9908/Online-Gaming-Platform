@@ -890,3 +890,259 @@ footer span:last-child {
         padding: 10px 5px;
     }
 }
+
+/* =========================================================
+   LUDO NIGHT SKY THEME — inspired by Snake & Ladder UI
+   Keeps the existing card layout and game interactions.
+========================================================= */
+
+:root {
+    --ludo-bg: #0a0e1a;
+    --ludo-panel: #111827;
+    --ludo-text: #e8edf2;
+    --ludo-muted: #9ca3af;
+}
+
+html {
+    min-height: 100%;
+    background: var(--ludo-bg);
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: "Nunito", "Trebuchet MS", Arial, sans-serif;
+    color: var(--ludo-text);
+    background:
+        radial-gradient(ellipse at 15% 15%, rgba(52, 152, 219, .13), transparent 35%),
+        radial-gradient(ellipse at 85% 75%, rgba(155, 89, 182, .13), transparent 35%),
+        linear-gradient(145deg, #080d19 0%, #101a2c 55%, #0a0e1a 100%);
+}
+
+.page {
+    min-height: 100vh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+header {
+    padding: 18px clamp(20px, 6vw, 80px);
+}
+
+.logo-dice {
+    background: linear-gradient(145deg, #fff8d8, #ffd95a);
+    box-shadow: 0 5px 0 #b98d27, 0 0 25px rgba(255, 218, 68, .2);
+}
+
+.logo-main {
+    color: #ffd84d;
+    text-shadow: 0 0 18px rgba(255, 216, 77, .25);
+}
+
+.logo-sub {
+    color: #8d9ab3;
+}
+
+.players-badge {
+    color: #dce6f5;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 5px 18px rgba(0,0,0,.18);
+    backdrop-filter: blur(8px);
+}
+
+main {
+    padding-top: 20px;
+    padding-bottom: 22px;
+}
+
+.hero {
+    margin-bottom: 28px;
+    animation: ludoFadeDown .7s ease both;
+}
+
+.floating-dice {
+    font-size: 48px;
+    filter: drop-shadow(0 0 18px rgba(255, 218, 68, .35));
+    animation: ludoDiceFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes ludoDiceFloat {
+    0%, 100% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(-11px) rotate(10deg); }
+}
+
+.title-badge {
+    color: #624900;
+    background: linear-gradient(135deg, #ffe77a, #ffc83d);
+    box-shadow: 0 4px 0 #b98d27, 0 0 22px rgba(255, 218, 68, .16);
+}
+
+.hero h1 {
+    color: #f2f5fb;
+    text-shadow: 0 3px 0 rgba(0,0,0,.25);
+}
+
+.hero h1 span {
+    color: #ff8fb0;
+    text-shadow: 0 0 24px rgba(255, 143, 176, .2);
+}
+
+.hero p {
+    color: #9caac1;
+}
+
+.modes {
+    gap: 20px;
+}
+
+.mode-card {
+    height: 292px;
+    padding: 21px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 22px;
+    background: linear-gradient(155deg, rgba(255,255,255,.09), rgba(255,255,255,.035));
+    box-shadow: 0 14px 35px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.07);
+    backdrop-filter: blur(12px);
+    animation: ludoCardEnter .65s ease both;
+}
+
+.mode-card:nth-child(2) { animation-delay: .12s; }
+.mode-card:nth-child(3) { animation-delay: .24s; }
+
+@keyframes ludoCardEnter {
+    from { opacity: 0; transform: translateY(24px) scale(.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.mode-card:hover {
+    transform: translateY(-8px) rotate(-1deg);
+    box-shadow: 0 20px 42px rgba(0,0,0,.32);
+}
+
+.mode-card:nth-child(2):hover {
+    transform: translateY(-8px) rotate(1deg);
+}
+
+.local { border-color: rgba(46, 204, 113, .42); }
+.friend { border-color: rgba(52, 152, 219, .42); }
+.random { border-color: rgba(155, 89, 182, .48); }
+
+.local:hover { border-color: #2ecc71; box-shadow: 0 18px 42px rgba(46,204,113,.16); }
+.friend:hover { border-color: #3498db; box-shadow: 0 18px 42px rgba(52,152,219,.16); }
+.random:hover { border-color: #b77bea; box-shadow: 0 18px 42px rgba(155,89,182,.18); }
+
+.local .mode-icon {
+    background: rgba(46,204,113,.15);
+    box-shadow: 0 0 24px rgba(46,204,113,.12);
+}
+.friend .mode-icon {
+    background: rgba(52,152,219,.15);
+    box-shadow: 0 0 24px rgba(52,152,219,.12);
+}
+.random .mode-icon {
+    background: rgba(155,89,182,.17);
+    box-shadow: 0 0 24px rgba(155,89,182,.12);
+}
+
+.mode-card h2 { color: #f2f5fb; }
+.mode-card p { color: #aab5c8; }
+.mode-number { color: #8390a8; }
+.players { color: #e2e9f4; }
+.players span { color: #9caac1; }
+
+.card-decoration {
+    filter: drop-shadow(0 0 8px rgba(255,255,255,.2));
+}
+
+.play-button {
+    border-radius: 13px;
+    box-shadow: 0 4px 0 rgba(0,0,0,.2);
+    letter-spacing: .6px;
+    transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.play-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 0 rgba(0,0,0,.2);
+}
+
+footer {
+    color: #8d9ab3;
+    padding: 14px 12px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+footer span:first-child,
+footer span:last-child {
+    filter: drop-shadow(0 0 8px rgba(255,218,68,.35));
+}
+
+/* Hide the old pastel bubbles/clouds; the floating game emojis replace them. */
+.bubble,
+.cloud {
+    display: none;
+}
+
+.star {
+    opacity: .75;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,.25));
+    z-index: 1;
+}
+
+/* Floating dice, pawns and stars — same drifting effect as Snake & Ladder. */
+.ludo-floater {
+    position: fixed;
+    bottom: -70px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,.18));
+    animation: ludoFloatDrift linear infinite;
+}
+
+@keyframes ludoFloatDrift {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: .2; }
+    85% { opacity: .16; }
+    100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes ludoFadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+    main { padding-top: 12px; }
+    .modes {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: auto;
+        gap: 15px;
+    }
+    .mode-card { height: 260px; }
+}
+
+@media (max-width: 500px) {
+    header { padding: 12px 15px; }
+    main { width: 92%; padding-top: 8px; }
+    .hero { margin-bottom: 20px; }
+    .floating-dice { font-size: 38px; }
+    .hero h1 { font-size: 32px; }
+    .hero h1 span { display: block; }
+    .mode-card { height: 250px; padding: 17px; }
+    .mode-icon { width: 55px; height: 55px; font-size: 28px; }
+    footer { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}

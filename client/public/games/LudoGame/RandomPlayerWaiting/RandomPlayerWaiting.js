@@ -23,17 +23,17 @@ socket.on('matchfound',(data)=>{
 
    if(data)
    {        
-        opponent = data.players?.filter((i)=> i.name!==username.ingameId)
+        opponent = data.players?.find((i)=> i.name!==username.username)
    }
 
-   
-   const getPlayerTurn = opponent[0].turn
+   console.log('opponent details',opponent)
+   const getPlayerTurn = opponent.turn
    const opponentProfile = document.getElementById('opponentprofile')
    const SearchingForPlayerText = document.getElementById('searchingText')
    
    if(opponent)
 {
-    opponentProfile.innerHTML = `<img src='${opponent[0].playerprofile}'/>`
+    opponentProfile.innerHTML = `<img src='${opponent.playerprofile}'/>`
 
     // Change main heading
     const mainHeading = document.getElementById('mainHeading')
@@ -74,7 +74,7 @@ socket.on('matchfound',(data)=>{
         {
             clearInterval(countdown)
 
-            window.location.href =
+             window.location.href =
             `../LudoMainPlayingFiles/LudoMainPlayingFile.html?roomid=${data.roomid}`
         }
 
