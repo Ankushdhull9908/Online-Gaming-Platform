@@ -17,6 +17,7 @@ import {
   Star,
 } from "lucide-react";
 import { games } from "../Games.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const heroSlides = [
   {
@@ -100,6 +101,7 @@ const leaderboard = [
 
 function Home() {
   const nav = useNavigate();
+  const {setShowNavBar} = useAuth()
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -391,7 +393,12 @@ function Home() {
             {(filteredGames.length > 0 ? filteredGames : games).map((game, idx) => (
               <div
                 key={game.id}
-                onClick={() => nav(`/loadgame/${game.id}`)}
+                onClick={() => {
+                  nav(`/loadgame/${game.id}`),
+                  setShowNavBar(false)
+                }
+              
+              }
                 style={cardStyle}
                 className="group relative rounded-3xl border backdrop-blur-md overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
               >
@@ -458,6 +465,7 @@ function Home() {
                     onClick={(e) => {
                       e.stopPropagation();
                       nav(`/loadgame/${game.id}`);
+                      setShowNavBar(false)
                     }}
                     style={primaryBtnStyle}
                     className="w-full py-3 rounded-xl font-orbitron text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:brightness-110 transition-all cursor-pointer"

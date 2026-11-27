@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [loginLoading,setLoginLoading]=  useState(false)
+  const [shownavbar,setShowNavBar] = useState(true)
   const nav = useNavigate()
   console.log('user data',user)
 
@@ -177,7 +178,8 @@ export function AuthProvider({ children }) {
         login,
         logout,
         checkAuth,
-        loginLoading
+        loginLoading,
+        shownavbar,setShowNavBar
       }}
     >
 

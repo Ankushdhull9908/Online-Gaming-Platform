@@ -8,13 +8,18 @@ import LoadGame from "./pages/game/LoadGame";
 import Themes from "./pages/themes/Themes";
 import Shop from "./pages/shop/Shop";
 import ScrollToTop from "./components/ScrollToTop";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
+  const {shownavbar} = useAuth()
 
   return (
 
     <>
-    <Navbar/>
+    {
+      shownavbar ? <Navbar/> : ''
+    }
+    
     <ScrollToTop/>
     <Routes>
       <Route path="/" element={<Home/>}/>

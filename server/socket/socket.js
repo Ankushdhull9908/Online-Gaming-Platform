@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 
-import Ludo from "../games/Ludo.js";
+import Ludo from "../games/Ludo/Ludo.js";
 import SnakeAndLadder from "../games/SnakeAndLadder.js";
 /**
  * Boots the shared socket.io server and routes each connection to the

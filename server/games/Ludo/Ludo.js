@@ -7,6 +7,7 @@ const player1path = [91,92,93,94,95,81,66,51,36,21,6,7,8,23,38,53,68,83,99,100,1
     const player2path = [133,132,131,130,129,143,158,173,188,203,218,217,216,201,186,171,156,141,125,124,123,122,121,120,
     105,90,91,92,93,94,95,81,66,51,36,21,6,7,8,23,38,53,68,83,99,100,101,102,103,104,119,118,117,116,115,114,113]
 
+    const safetoken = [91,36,23,102,133,188,201,122]
 function CheckUserExist(user)
 {
   const Exist = waitingPlayers.filter((i)=>i.name===user.name)
@@ -91,7 +92,9 @@ function MakeRoom(io,player1,player2)
         token:[{position:191,movedSteps:0,status:'locked'},{position:192,movedSteps:0,status:'locked'},{position:176,movedSteps:0,status:'locked'},{position:177,movedSteps:0,status:'locked'}]
        },
        player1unlock:false,
-       player2unlock:false
+       player2unlock:false,
+       buttondisabled:false
+  
   }
   
 }
@@ -137,14 +140,20 @@ export default function Ludo(io, socket, data) {
     // roll dice
 
     socket.on('rolldice',(roomid)=>{
-
+   
     const diceval = Math.ceil(Math.random()*6)
     games[roomid].dice = diceval
 
     const game = games[roomid]
-
+    if(diceval===6)
+    {
+      games[roomid].buttondisabled = true
+    }
+    
+ 
     if(diceval !== 6)
     {
+      // player1 turn and player1 is locked
         if(game.turn === 1 && game.player1unlock === false)
         {
             changeTurn(roomid)
@@ -158,7 +167,6 @@ export default function Ludo(io, socket, data) {
     io.to(roomid).emit('dicerolldata',games[roomid])
 })
 
-    
 
     
     socket.on('moveplayertoken',(data)=>{
@@ -172,6 +180,7 @@ export default function Ludo(io, socket, data) {
     {
       console.log('change turn called',games[roomid])
         if(games[roomid].dice===6){
+          games[roomid].buttondisabled=true
           return
         }
 

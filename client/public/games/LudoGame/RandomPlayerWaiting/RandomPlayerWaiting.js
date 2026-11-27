@@ -42,43 +42,44 @@ socket.on('matchfound',(data)=>{
         Match <span>Found!</span>
     `
 
-    // Hide searching text
-    SearchingForPlayerText.style.display = 'none'
+    // // Hide searching text
+    // SearchingForPlayerText.style.display = 'none'
 
-    // Hide dots
-    document.querySelector('.dots').style.display = 'none'
-
-
-    // Show countdown
-    const countdownContainer = document.getElementById('countdownContainer')
-    const countdownNumber = document.getElementById('countdownNumber')
-
-    countdownContainer.style.display = 'flex'
+    // // Hide dots
+    // document.querySelector('.dots').style.display = 'none'
 
 
-    // Countdown
-    let count = 3
+    // // Show countdown
+    // const countdownContainer = document.getElementById('countdownContainer')
+    // const countdownNumber = document.getElementById('countdownNumber')
 
-    const countdown = setInterval(() => {
+    // countdownContainer.style.display = 'flex'
 
-        countdownNumber.innerHTML = count
 
-        // Restart animation
-        countdownNumber.style.animation = 'none'
-        countdownNumber.offsetHeight
-        countdownNumber.style.animation = 'countdownAnimation 1s ease-in-out'
+    // // Countdown
+    // let count = 3
 
-        count--
+    // const countdown = setInterval(() => {
 
-        if(count < 0)
-        {
-            clearInterval(countdown)
+    //     countdownNumber.innerHTML = count
 
-             window.location.href =
+    //     // Restart animation
+    //     countdownNumber.style.animation = 'none'
+    //     countdownNumber.offsetHeight
+    //     countdownNumber.style.animation = 'countdownAnimation 1s ease-in-out'
+
+    //     count--
+
+    //     if(count < 0)
+    //     {
+    //         clearInterval(countdown)
+
+             
+    //     }
+
+    // },1000)
+    window.location.href =
             `../LudoMainPlayingFiles/LudoMainPlayingFile.html?roomid=${data.roomid}`
-        }
-
-    },1000)
 
 
     if(getPlayerTurn===1)

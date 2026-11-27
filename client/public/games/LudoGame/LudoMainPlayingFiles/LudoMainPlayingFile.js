@@ -116,7 +116,7 @@ function StartTurnTimer(turn)
 var movetoken = false
 var playermoved = false
 
-
+//121
 
 LoadLudoBoard()
 console.log(myturn)
@@ -183,6 +183,11 @@ socket.on('initial-game-data',(data)=>{
 
 })
 
+
+//  player dice roll --> 6 -> dice roll - 4  turn 2 player player2 ---> dice roll --> 4 turn ---> 1
+// player 1 dice roll --> 6 button disabled ---> dice roll ---> button disabled turn change ----player 2 ---> dice roll
+
+
 function LoadLudoBoard()
 {
      const ludoBoard = document.getElementById('ludo-board')
@@ -190,7 +195,7 @@ function LoadLudoBoard()
      {
         const cell = document.createElement('div')
         cell.classList.add('cell')
-       //cell.innerText =i
+        //cell.innerText =i
         ludoBoard.append(cell)
 
      }
@@ -220,12 +225,12 @@ function SpawnPlayersTokenOnBoard(data)
         token.addEventListener('click',(i)=>{
               if(movetoken==true && i.target.dataset.turn===myturn)
                {
-                alert('player1 condition is true and current turn',myturn)
+                //alert('player1 condition is true and current turn',myturn)
                 socket.emit('moveplayertoken',{roomid:roomid,token:i.target.dataset.token})
                 movetoken = false
                 playermoved = true
                }else{
-                alert('you cant move')
+               // alert('you cant move')
                }
               
         })
@@ -243,12 +248,12 @@ function SpawnPlayersTokenOnBoard(data)
         token.addEventListener('click',(i)=>{
                if(movetoken==true && i.target.dataset.turn===myturn)
                {
-                    alert('player2 condition is true and current turn',myturn)
+                    //alert('player2 condition is true and current turn',myturn)
                     socket.emit('moveplayertoken',{roomid:roomid,token:i.target.dataset.token})
                     movetoken = false
                     playermoved = true
                }else{
-                alert('you cant move')
+               // alert('you cant move')
                }
               
         })
@@ -291,8 +296,12 @@ const diceAnimation = setInterval(()=>{
 
 
     document.getElementById('diceval').innerHTML = `dice val ${dicedata.dice}`
-       // you can only move you token if 
-       
+            if(dicedata.buttondisabled===true && dicedata.turn==myturn)
+            {
+                movetoken = true
+            document.getElementById('diceroll').disabled = true
+            return
+            }
     
             if(dicedata.turn==myturn)
         {

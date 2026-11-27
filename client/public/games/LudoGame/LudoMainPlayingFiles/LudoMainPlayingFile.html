@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Ludo Battle</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="LudoMainPlayingFile.css">
 
     <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
@@ -15,194 +13,103 @@
 </head>
 
 <body>
-
     <div class="ludogame-container">
 
-        <!-- ================= HEADER ================= -->
+        <header class="game-header">
+            <button class="back-button" type="button"  aria-label="Go back"><a href="/client/public/games//LudoGame/LudoModeSelection/LudoModeSelection.html">
+                <span class="back-arrow">←</span>
+                <span class="back-label">BACK</span>
+                </a>
+            </button>
 
-        
-<header class="game-header">
+            <div class="player-card my-player" id="myPlayerCard">
+                <div class="player-avatar">
+                    <img id="myProfile" alt="Your Profile">
+                    <span class="turn-timer" id="myTimer">15</span>
+                </div>
+                <div class="player-info">
+                    <span class="player-label">YOU</span>
+                    <h3 id="myName">Player</h3>
+                    <span class="player-status">🎮 YOUR PLAYER</span>
+                </div>
+            </div>
 
-    <!-- YOUR PLAYER -->
-    <div class="player-card my-player" id="myPlayerCard">
+            <div class="game-title">
+                <div class="title-crown">👑</div>
+                <div>
+                    <h1>LUDO</h1>
+                    <span>LET'S PLAY!</span>
+                </div>
+            </div>
 
-        <div class="player-avatar">
-
-            <img id="myProfile" alt="Your Profile">
-
-            <span class="turn-timer" id="myTimer">15</span>
-
-        </div>
-
-        <div class="player-info">
-            <span class="player-label">YOU</span>
-            <h3 id="myName">Player</h3>
-            <span class="player-status">🎮 YOUR PLAYER</span>
-        </div>
-
-    </div>
-
-
-    <!-- CENTER TITLE -->
-    <div class="game-title">
-
-        <div class="title-crown">👑</div>
-
-        <div>
-            <h1>LUDO</h1>
-            <span>LET'S PLAY!</span>
-        </div>
-
-    </div>
-
-
-    <!-- OPPONENT -->
-    <div class="player-card opponent-player" id="opponentPlayerCard">
-
-        <div class="player-info opponent-info">
-            <span class="player-label">OPPONENT</span>
-            <h3 id="opponentName">Waiting...</h3>
-            <span class="player-status">🎮 PLAYER 2</span>
-        </div>
-
-        <div class="player-avatar opponent-avatar">
-
-            <img id="opponentProfile"
-                 
-                 alt="Opponent Profile">
-
-            <span class="turn-timer" id="opponentTimer">15</span>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-
-
-        <!-- ================= MAIN GAME ================= -->
+            <div class="player-card opponent-player" id="opponentPlayerCard">
+                <div class="player-info opponent-info">
+                    <span class="player-label">OPPONENT</span>
+                    <h3 id="opponentName">Waiting...</h3>
+                    <span class="player-status">🎮 PLAYER 2</span>
+                </div>
+                <div class="player-avatar opponent-avatar">
+                    <img id="opponentProfile" alt="Opponent Profile">
+                    <span class="turn-timer" id="opponentTimer">15</span>
+                </div>
+            </div>
+        </header>
 
         <main class="game-area">
-
-            <!-- BOARD -->
-
             <section class="board-section">
-
-                
-
-
-                <div class="board-wrapper">
-
-                    <div class="board-glow"></div>
-
-                    <!-- YOUR EXISTING BOARD -->
-
-                    <div class="ludo-baord" id="ludo-board"></div>
-
+                <div class="board-top-bar">
+                    <div class="match-badge"><span class="live-dot"></span> LIVE MATCH</div>
+                    <div class="room-info">LUDO <span>● 1V1</span></div>
                 </div>
 
+                <div class="board-wrapper">
+                    <div class="board-glow"></div>
+                    <div class="ludo-baord" id="ludo-board"></div>
+                </div>
             </section>
 
-
-            <!-- ================= SIDEBAR ================= -->
-
             <aside class="game-sidebar">
-
-                <!-- TURN CARD -->
-
                 <div class="turn-card">
-
-                    <div class="turn-icon">
-                        ⚡
-                    </div>
-
+                    <div class="turn-icon">⚡</div>
                     <div>
                         <span class="small-heading">GAME STATUS</span>
                         <h2 id="playerturnText">Your Turn</h2>
                     </div>
-
                 </div>
 
-
-                <!-- DICE AREA -->
-
                 <div class="dice-card">
-
                     <span class="small-heading">DICE ROLL</span>
-
                     <div class="dice-stage">
-
                         <div id="dice" class="dice">
                             <div class="dice-face">?</div>
                         </div>
-
                     </div>
-
                     <div class="dice-result">
                         <span>RESULT</span>
                         <strong id="diceval">-</strong>
                     </div>
-
                     <button id="diceroll" class="roll-button">
-
                         <span class="button-icon">🎲</span>
-
                         <span>ROLL DICE</span>
-
                     </button>
-
                 </div>
-
-
-                <!-- MATCH INFO -->
 
                 <div class="match-info-card">
-
-                    <div class="info-title">
-                        <span>⚔</span>
-                        MATCH INFO
-                    </div>
-
-                    <div class="info-row">
-                        <span>Players</span>
-                        <strong>2 / 2</strong>
-                    </div>
-
-                    <div class="info-row">
-                        <span>Mode</span>
-                        <strong>Classic</strong>
-                    </div>
-
-                    <div class="info-row">
-                        <span>Status</span>
-                        <strong class="playing-text">Playing</strong>
-                    </div>
-
+                    <div class="info-title"><span>⚔</span> MATCH INFO</div>
+                    <div class="info-row"><span>Players</span><strong>2 / 2</strong></div>
+                    <div class="info-row"><span>Mode</span><strong>Classic</strong></div>
+                    <div class="info-row"><span>Status</span><strong class="playing-text">Playing</strong></div>
                 </div>
 
-
-                <!-- TIP -->
-
                 <div class="game-tip">
-
                     <span class="tip-icon">💡</span>
-
                     <div>
                         <strong>How to play</strong>
                         <p>Roll the dice and select one of your tokens to move.</p>
                     </div>
-
                 </div>
-
             </aside>
-
         </main>
-
     </div>
-
 </body>
-
 </html>
-
